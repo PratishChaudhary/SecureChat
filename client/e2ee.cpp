@@ -66,7 +66,7 @@ class Keys{
         return decryptedMessage;
     }
     
-    /* On sending a message of type 1, we call roomKeyGenerationAndSharing function alongside provided map of public keys in 
+    /* On sending a message of type 104, we call roomKeyGenerationAndSharing function alongside provided map of public keys in 
     that type of message. On type 105, We call SetRoomKeyIfNotLeader function which consists of leaderPublicKey and 
     encryptedRoomKey extracted from the unordered map sent by the leader*/
 
