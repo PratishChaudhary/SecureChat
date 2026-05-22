@@ -1,0 +1,6 @@
+module ChatServer1
+typeinfo appChatServer1.qmltypes
+prefer :/qt/qml/ChatServer1/
+Main 254.0 Main.qml
+depends QtQuick
+

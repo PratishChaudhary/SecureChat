@@ -1,0 +1,14 @@
+-I
+C:/Users/ACER/Desktop/secure_chat/SecureChat/qt/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug
+-I
+C:/Users/ACER/Desktop/secure_chat/SecureChat/qt/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug/ChatServer1
+-I
+C:/Users/ACER/Desktop/secure_chat/SecureChat/qt/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug
+-I
+D:/qt_framework/6.11.0/mingw_64/qml
+--resource
+C:/Users/ACER/Desktop/secure_chat/SecureChat/qt/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug/.qt/rcc/qmake_ChatServer1.qrc
+--resource
+C:/Users/ACER/Desktop/secure_chat/SecureChat/qt/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug/.qt/rcc/appChatServer1_raw_qml_0.qrc
+--module
+ChatServer1

@@ -1,0 +1,3 @@
+[C:<SLASH>Users<SLASH>ACER<SLASH>Desktop<SLASH>secure_chat<SLASH>SecureChat<SLASH>qt]
+importPaths="C:/Users/ACER/Desktop/secure_chat/SecureChat/qt/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug;C:/Users/ACER/Desktop/secure_chat/SecureChat/qt/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug/ChatServer1;D:/qt_framework/6.11.0/mingw_64/qml"
+resourceFiles="C:/Users/ACER/Desktop/secure_chat/SecureChat/qt/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug/.qt/rcc/qmake_ChatServer1.qrc;C:/Users/ACER/Desktop/secure_chat/SecureChat/qt/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug/.qt/rcc/appChatServer1_raw_qml_0.qrc"

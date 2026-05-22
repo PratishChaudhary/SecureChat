@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/ChatServer1">
+    <file alias="qmldir">C:/Users/ACER/Desktop/secure_chat/SecureChat/qt/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug/ChatServer1/qmldir</file>
+  </qresource>
+</RCC>
+
