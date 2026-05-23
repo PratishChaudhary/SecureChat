@@ -1,0 +1,9 @@
+-rootPath
+C:/Users/prati/OneDrive/Documents/Server
+-cmake-output
+-output-file
+C:/Users/prati/OneDrive/Documents/Server/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug/.qt/qml_imports/Server_conf.cmake
+-importPath
+C:/Users/prati/OneDrive/Documents/Server/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug
+-importPath
+C:/Qt/6.11.0/mingw_64/qml
