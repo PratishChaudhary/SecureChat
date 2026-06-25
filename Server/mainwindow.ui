@@ -6,86 +6,395 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>980</width>
+    <height>640</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>SecureChat Server — port 8080</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">
+/* ── Base ─────────────────────────────────────────────── */
+QMainWindow, QWidget {
+    background-color: #1c1f27;
+    color: #d4dbe8;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 13px;
+}
+
+/* ── Left panel ───────────────────────────────────────── */
+QFrame#leftPanel {
+    background-color: #14171e;
+    border-right: 1px solid #2a2e3d;
+}
+
+/* ── Section labels ───────────────────────────────────── */
+QLabel#label_UsersHeader,
+QLabel#label_LogHeader {
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #4a5a72;
+    background: transparent;
+    padding: 0px 4px;
+}
+
+/* ── User list widget ─────────────────────────────────── */
+QListWidget#listWidget_Users {
+    background-color: #14171e;
+    border: none;
+    outline: none;
+    font-size: 13px;
+    color: #c8d4e3;
+}
+QListWidget#listWidget_Users::item {
+    padding: 6px 8px;
+    border-bottom: 1px solid #1e2330;
+}
+QListWidget#listWidget_Users::item:selected {
+    background-color: #1e2b20;
+    color: #7ecfb3;
+}
+
+/* ── Event log ────────────────────────────────────────── */
+QTextEdit#textEdit_Event_Log {
+    background-color: #11131a;
+    border: 1px solid #1e2330;
+    border-radius: 6px;
+    color: #4a8a72;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 11px;
+    padding: 6px;
+}
+
+/* ── Center message log ───────────────────────────────── */
+QTextEdit#textEdit_Client_Messages {
+    background-color: #181b23;
+    border: 1px solid #2a2e3d;
+    border-radius: 8px;
+    color: #d4dbe8;
+    font-size: 13px;
+    padding: 10px;
+}
+
+/* ── Bottom bar ───────────────────────────────────────── */
+QFrame#bottomBar {
+    background-color: #14171e;
+    border-top: 1px solid #2a2e3d;
+}
+
+QComboBox#comboBox_Client_List,
+QComboBox#combobox2_Send_Message_type {
+    background-color: #1e2330;
+    border: 1px solid #2e3650;
+    border-radius: 6px;
+    color: #c8d4e3;
+    padding: 4px 8px;
+    font-size: 12px;
+    min-height: 32px;
+}
+QComboBox#comboBox_Client_List:hover,
+QComboBox#combobox2_Send_Message_type:hover {
+    border-color: #3d7a5e;
+}
+QComboBox::drop-down {
+    border: none;
+    width: 20px;
+}
+QComboBox QAbstractItemView {
+    background-color: #1e2330;
+    border: 1px solid #2e3650;
+    color: #c8d4e3;
+    selection-background-color: #1e2b20;
+    selection-color: #7ecfb3;
+}
+
+QLineEdit#lineEdit_send_message {
+    background-color: #1e2330;
+    border: 1px solid #2e3650;
+    border-radius: 6px;
+    color: #d4dbe8;
+    padding: 4px 10px;
+    font-size: 13px;
+    min-height: 32px;
+}
+QLineEdit#lineEdit_send_message:focus {
+    border-color: #3d7a5e;
+}
+
+QPushButton#push_button_Send {
+    background-color: #2d5e47;
+    color: #a8e6cc;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 18px;
+    font-size: 13px;
+    font-weight: bold;
+    min-height: 32px;
+}
+QPushButton#push_button_Send:hover {
+    background-color: #3d7a5e;
+}
+QPushButton#push_button_Send:pressed {
+    background-color: #1e4a35;
+}
+
+/* ── Status bar ───────────────────────────────────────── */
+QStatusBar {
+    background-color: #11131a;
+    color: #4a6a58;
+    font-size: 11px;
+    border-top: 1px solid #1e2330;
+}
+   </string>
+  </property>
+
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0" colspan="4">
-     <widget class="QTextEdit" name="textEdit_Client_Messages">
-      <property name="font">
-       <font>
-        <pointsize>24</pointsize>
-       </font>
+   <layout class="QHBoxLayout" name="rootLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+
+    <!-- ══ LEFT PANEL: users + event log ══════════════════════════════ -->
+    <item>
+     <widget class="QFrame" name="leftPanel">
+      <property name="minimumWidth">
+       <number>210</number>
       </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QComboBox" name="comboBox_Client_List">
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
+      <property name="maximumWidth">
+       <number>220</number>
       </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QComboBox" name="combobox2_Send_Message_type">
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
       </property>
-      <item>
-       <property name="text">
-        <string>All</string>
+      <layout class="QVBoxLayout" name="leftLayout">
+       <property name="spacing">
+        <number>8</number>
        </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Aayush</string>
+       <property name="leftMargin">
+        <number>10</number>
        </property>
+       <property name="topMargin">
+        <number>12</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+
+       <!-- Users header -->
+       <item>
+        <widget class="QLabel" name="label_UsersHeader">
+         <property name="text">
+          <string>CONNECTED USERS</string>
+         </property>
+        </widget>
+       </item>
+
+       <!-- User list — display only, populated from comboBox_Client_List data in code -->
+       <item>
+        <widget class="QListWidget" name="listWidget_Users">
+         <property name="minimumHeight">
+          <number>160</number>
+         </property>
+         <property name="maximumHeight">
+          <number>220</number>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+
+       <!-- Divider spacer -->
+       <item>
+        <widget class="QLabel" name="label_LogHeader">
+         <property name="text">
+          <string>EVENT LOG</string>
+         </property>
+        </widget>
+       </item>
+
+       <!-- Event log text area -->
+       <item>
+        <widget class="QTextEdit" name="textEdit_Event_Log">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="verticalScrollBarPolicy">
+          <enum>Qt::ScrollBarAsNeeded</enum>
+         </property>
+        </widget>
+       </item>
+
+      </layout>
+     </widget>
+    </item>
+
+    <!-- ══ CENTER: main message log + bottom send bar ════════════════ -->
+    <item>
+     <layout class="QVBoxLayout" name="centerLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+
+      <!-- Message log — this is the main textEdit_Client_Messages from original code -->
+      <item>
+       <widget class="QTextEdit" name="textEdit_Client_Messages">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAsNeeded</enum>
+        </property>
+        <property name="placeholderText">
+         <string>Server log will appear here...</string>
+        </property>
+       </widget>
       </item>
-     </widget>
+
+      <!-- Bottom send bar -->
+      <item>
+       <widget class="QFrame" name="bottomBar">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="minimumHeight">
+         <number>56</number>
+        </property>
+        <property name="maximumHeight">
+         <number>56</number>
+        </property>
+        <layout class="QHBoxLayout" name="bottomLayout">
+         <property name="spacing">
+          <number>8</number>
+         </property>
+         <property name="leftMargin">
+          <number>12</number>
+         </property>
+         <property name="topMargin">
+          <number>10</number>
+         </property>
+         <property name="rightMargin">
+          <number>12</number>
+         </property>
+         <property name="bottomMargin">
+          <number>10</number>
+         </property>
+
+         <!-- Target user dropdown — comboBox_Client_List (exact name from C++) -->
+         <item>
+          <widget class="QComboBox" name="comboBox_Client_List">
+           <property name="minimumWidth">
+            <number>120</number>
+           </property>
+           <property name="maximumWidth">
+            <number>140</number>
+           </property>
+           <property name="toolTip">
+            <string>Target user</string>
+           </property>
+          </widget>
+         </item>
+
+         <!-- Broadcast mode dropdown — combobox2_Send_Message_type (exact name from C++) -->
+         <item>
+          <widget class="QComboBox" name="combobox2_Send_Message_type">
+           <property name="minimumWidth">
+            <number>70</number>
+           </property>
+           <property name="maximumWidth">
+            <number>80</number>
+           </property>
+           <item>
+            <property name="text">
+             <string>All</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>One</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+
+         <!-- Message input — lineEdit_send_message (exact name from C++) -->
+         <item>
+          <widget class="QLineEdit" name="lineEdit_send_message">
+           <property name="placeholderText">
+            <string>Type a server message...</string>
+           </property>
+          </widget>
+         </item>
+
+         <!-- Send button — push_button_Send (exact name from C++) -->
+         <item>
+          <widget class="QPushButton" name="push_button_Send">
+           <property name="text">
+            <string>Send</string>
+           </property>
+           <property name="maximumWidth">
+            <number>80</number>
+           </property>
+          </widget>
+         </item>
+
+        </layout>
+       </widget>
+      </item>
+
+     </layout>
     </item>
-    <item row="1" column="2">
-     <widget class="QLineEdit" name="lineEdit_send_message">
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="3">
-     <widget class="QPushButton" name="push_button_Send">
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>send</string>
-      </property>
-     </widget>
-    </item>
+
    </layout>
   </widget>
+
+  <!-- Menu bar -->
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>980</width>
      <height>26</height>
     </rect>
    </property>
   </widget>
+
+  <!-- Status bar -->
   <widget class="QStatusBar" name="statusbar"/>
+
  </widget>
  <resources/>
  <connections/>

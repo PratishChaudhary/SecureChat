@@ -3,67 +3,110 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QJsonArray>
+#include <QDateTime>
+#include <QListWidgetItem>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     TCP_Server = new QTcpServer(this);
     connect(TCP_Server, &QTcpServer::newConnection, this, &MainWindow::newConnection);
 
-    if(TCP_Server->listen(QHostAddress::Any, 8080)){
-        ui->textEdit_Client_Messages->append("=== Server started successfully on port 8080 ===");
+    if (TCP_Server->listen(QHostAddress::Any, 8080)) {
+        log("=== Server started successfully on port 8080 ===");
+        statusBar()->showMessage("Server running on port 8080   |   0 clients connected");
     } else {
-        ui->textEdit_Client_Messages->append("!!! Server failed to start !!!");
+        log("!!! Server failed to start !!!");
+        statusBar()->showMessage("Server failed to start");
     }
 }
 
 MainWindow::~MainWindow()
 {
-    // Clean up dynamic structures to avoid memory leaks
     qDeleteAll(UserRegistry);
     UserRegistry.clear();
     delete ui;
 }
 
-void MainWindow::newConnection(){
-    while (TCP_Server->hasPendingConnections()){
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+// Appends a timestamped line to the compact event log on the left panel
+void MainWindow::logEvent(const QString &text)
+{
+    QString ts = QDateTime::currentDateTime().toString("hh:mm");
+    ui->textEdit_Event_Log->append(QString("[%1] %2").arg(ts, text));
+}
+
+// Appends a line to the main server message log in the center panel
+void MainWindow::log(const QString &text)
+{
+    ui->textEdit_Client_Messages->append(text);
+}
+
+// Rebuilds the user list widget in the left panel and the target combobox in the send bar.
+// Called whenever UserRegistry changes.
+void MainWindow::refreshUserDisplay()
+{
+    // ── Left panel list widget ────────────────────────────────────────────
+    ui->listWidget_Users->clear();
+    for (auto it = UserRegistry.cbegin(); it != UserRegistry.cend(); ++it) {
+        bool isLeader = (it.key() == leaderUsername);
+        QString label = it.key();
+        if (isLeader) label += "  ★";
+        QListWidgetItem *item = new QListWidgetItem(label);
+        item->setToolTip(QString("Public key: %1").arg(it.value()->publicKey));
+        ui->listWidget_Users->addItem(item);
+    }
+
+    // ── Target combobox in the send bar ──────────────────────────────────
+    ui->comboBox_Client_List->clear();
+    ui->comboBox_Client_List->addItems(UserRegistry.keys());
+
+    // ── Status bar ────────────────────────────────────────────────────────
+    QString leaderInfo = leaderUsername.isEmpty() ? "none" : leaderUsername;
+    statusBar()->showMessage(
+        QString("Server running on port 8080   |   %1 client(s) connected   |   leader: %2")
+        .arg(UserRegistry.size()).arg(leaderInfo)
+    );
+}
+
+// ─── Connection handling ───────────────────────────────────────────────────────
+
+void MainWindow::newConnection()
+{
+    while (TCP_Server->hasPendingConnections()) {
         Add_New_Client_Connection(TCP_Server->nextPendingConnection());
     }
 }
 
-void MainWindow::Add_New_Client_Connection(QTcpSocket* socket)
+void MainWindow::Add_New_Client_Connection(QTcpSocket *socket)
 {
-    connect(socket, &QTcpSocket::readyRead, this, &MainWindow::Read_Data_From_Socket);
-
-    // --- ADD THIS CONNECT LINE ---
+    connect(socket, &QTcpSocket::readyRead,    this, &MainWindow::Read_Data_From_Socket);
     connect(socket, &QTcpSocket::disconnected, this, &MainWindow::Client_Disconnected);
 
     QJsonObject packet101;
-    packet101["type"] = 101;
+    packet101["type"]    = 101;
     packet101["p_value"] = DH_P;
     packet101["g_value"] = DH_G;
 
-    QJsonDocument doc(packet101);
-    socket->write(doc.toJson(QJsonDocument::Compact) + "\n");
-    ui->textEdit_Client_Messages->append("New unauthenticated client connected.");
+    socket->write(QJsonDocument(packet101).toJson(QJsonDocument::Compact) + "\n");
+    log("New unauthenticated client connected.");
 }
+
+// ─── Incoming data ─────────────────────────────────────────────────────────────
 
 void MainWindow::Read_Data_From_Socket()
 {
-    QTcpSocket *socket = qobject_cast<QTcpSocket*>(sender());
+    QTcpSocket *socket = qobject_cast<QTcpSocket *>(sender());
     if (!socket) return;
 
-    // Read everything currently sitting in the network socket's buffer
     QByteArray rawIncomingStream = socket->readAll();
-
-    // FIXED: Split data packages explicitly by our newline boundary marker
-    // This stops TCP from blending multiple JSON documents into a single un-parsable block
     QList<QByteArray> segmentedPackets = rawIncomingStream.split('\n');
 
-    for (const QByteArray& rawPacket : segmentedPackets) {
-        // Clean off any lingering spacing adjustments or blank loops
+    for (const QByteArray &rawPacket : segmentedPackets) {
         QByteArray cleanPacket = rawPacket.trimmed();
         if (cleanPacket.isEmpty()) continue;
 
@@ -71,82 +114,76 @@ void MainWindow::Read_Data_From_Socket()
         QJsonDocument doc = QJsonDocument::fromJson(cleanPacket, &parseError);
 
         if (parseError.error != QJsonParseError::NoError) {
-            ui->textEdit_Client_Messages->append("Parsing Warning: Dropped malformed segment: " + QString(cleanPacket));
+            log("Parsing Warning: Dropped malformed segment: " + QString(cleanPacket));
             continue;
         }
 
-        QJsonObject json = doc.object();
+        QJsonObject json    = doc.object();
         int messageType = json["type"].toInt();
 
-        // STEP 2: Handle Incoming Client Registration Information
+        // ── Type 102: Client registration ────────────────────────────────
         if (messageType == 102) {
-            QString name = json["username"].toString();
-            int clientPubKey = json["public_key"].toInt();
+            QString name      = json["username"].toString();
+            int clientPubKey  = json["public_key"].toInt();
 
             if (name.isEmpty()) continue;
 
-            // If a client reconnects, clean up their old entry first
             if (UserRegistry.contains(name)) {
                 delete UserRegistry.take(name);
             }
 
-            // Provision a fresh tracking token inside our master layout map
-            ClientInfo* info = new ClientInfo();
-            info->username = name;
-            info->socket = socket;
-            info->publicKey = clientPubKey;
+            ClientInfo *info  = new ClientInfo();
+            info->username    = name;
+            info->socket      = socket;
+            info->publicKey   = clientPubKey;
             UserRegistry[name] = info;
 
-            // Dynamically refresh the targeting interface controls
-            ui->comboBox_Client_List->clear();
-            ui->comboBox_Client_List->addItems(UserRegistry.keys());
+            log(QString("Registered: %1 (key: %2)").arg(name).arg(clientPubKey));
+            logEvent(name + " connected");
 
-            ui->textEdit_Client_Messages->append(QString("Successfully registered: %1 (Key: %2)").arg(name).arg(clientPubKey));
-
-            // CRITICAL FIX: Explicitly check if our active leader is dead, missing, or unassigned
             if (leaderUsername.isEmpty() || !UserRegistry.contains(leaderUsername)) {
                 leaderUsername = name;
-                ui->textEdit_Client_Messages->append(QString("+++ SYSTEM APPOINTMENT: %1 designated as Room Leader. +++").arg(leaderUsername));
+                log(QString("+++ Leader appointed: %1 +++").arg(leaderUsername));
+                logEvent(name + " appointed leader");
             }
 
-            // Trigger structural updates out to our processing core
+            refreshUserDisplay();
             sendLeaderUpdatedDirectory();
         }
 
-        // STEP 4: Handle Distributed Cryptographic Arrays arriving from our Leader
+        // ── Type 105: Leader distributes encrypted session keys ───────────
         else if (messageType == 105) {
-            int leaderPubKey = json["leader_public_key"].toInt();
-            QJsonArray keyPayloads = json["key_payloads"].toArray();
+            int leaderPubKey          = json["leader_public_key"].toInt();
+            QJsonArray keyPayloads    = json["key_payloads"].toArray();
 
-            ui->textEdit_Client_Messages->append("Leader delivered processing bundles. Route mapping processing...");
+            log("Leader delivered key bundles. Routing...");
 
             for (int i = 0; i < keyPayloads.size(); ++i) {
-                QJsonObject payload = keyPayloads[i].toObject();
-                QString targetUser = payload["target_user"].toString();
-                QString encryptedKeyHex = payload["encrypted_key"].toString();
+                QJsonObject payload      = keyPayloads[i].toObject();
+                QString targetUser       = payload["target_user"].toString();
+                QString encryptedKeyHex  = payload["encrypted_key"].toString();
 
-                // Look up the targeted profile in our client register database map
                 if (UserRegistry.contains(targetUser)) {
                     QJsonObject dispatchPacket;
-                    dispatchPacket["type"] = 105;
+                    dispatchPacket["type"]             = 105;
                     dispatchPacket["leader_public_key"] = leaderPubKey;
-                    dispatchPacket["encrypted_key"] = encryptedKeyHex;
+                    dispatchPacket["encrypted_key"]    = encryptedKeyHex;
 
-                    QJsonDocument dispatchDoc(dispatchPacket);
-                    QByteArray outboundWireData = dispatchDoc.toJson(QJsonDocument::Compact) + "\n";
-
-                    UserRegistry[targetUser]->socket->write(outboundWireData);
+                    UserRegistry[targetUser]->socket->write(
+                        QJsonDocument(dispatchPacket).toJson(QJsonDocument::Compact) + "\n"
+                    );
                 }
             }
         }
     }
 }
 
-// STEP 3: Automatically broadcast updating membership tracking logs back out to the designated room master
-void MainWindow::sendLeaderUpdatedDirectory() {
-    // Structural Guard: Fail safely if the designated leader profile is corrupted or missing
+// ─── Leader directory push ─────────────────────────────────────────────────────
+
+void MainWindow::sendLeaderUpdatedDirectory()
+{
     if (leaderUsername.isEmpty() || !UserRegistry.contains(leaderUsername)) {
-        ui->textEdit_Client_Messages->append("Directory sync skipped: Group Leader is missing or disconnected.");
+        log("Directory sync skipped: leader missing.");
         return;
     }
 
@@ -154,65 +191,29 @@ void MainWindow::sendLeaderUpdatedDirectory() {
     packet104["type"] = 104;
 
     QJsonArray participantsArray;
-    // Iterate across our operational data register map
-    for (auto it = UserRegistry.begin(); it != UserRegistry.end(); ++it) {
-        // Optimization Guard: The leader doesn't need to perform cryptographic tasks against their own key
+    for (auto it = UserRegistry.cbegin(); it != UserRegistry.cend(); ++it) {
         if (it.key() == leaderUsername) continue;
-
         QJsonObject peer;
-        peer["username"] = it.value()->username;
+        peer["username"]   = it.value()->username;
         peer["public_key"] = it.value()->publicKey;
         participantsArray.append(peer);
     }
 
     packet104["participants"] = participantsArray;
 
-    // Route the transaction direct down the leader's active connection channel
-    QTcpSocket* leaderSocket = UserRegistry[leaderUsername]->socket;
-    QJsonDocument doc(packet104);
-    QByteArray packageBytes = doc.toJson(QJsonDocument::Compact) + "\n";
-
-    leaderSocket->write(packageBytes);
-    ui->textEdit_Client_Messages->append(QString("Sent updated member listing to Leader (%1).").arg(leaderUsername));
+    QTcpSocket *leaderSocket = UserRegistry[leaderUsername]->socket;
+    leaderSocket->write(QJsonDocument(packet104).toJson(QJsonDocument::Compact) + "\n");
+    log(QString("Updated directory sent to leader (%1).").arg(leaderUsername));
 }
 
-void MainWindow::on_push_button_Send_clicked()
-{
-    QString rawMessage = ui->lineEdit_send_message->text();
-    QString receiver = ui->comboBox_Client_List->currentText();
-
-    if (rawMessage.isEmpty()) return;
-
-    // Format chat messages neatly as JSON packages so they don't break the client's parser
-    QJsonObject regularMessageObj;
-    regularMessageObj["type"] = 1; // Arbitrary type value for standard messages
-    regularMessageObj["payload"] = rawMessage;
-
-    QJsonDocument msgDoc(regularMessageObj);
-    QByteArray msgPayload = msgDoc.toJson(QJsonDocument::Compact) + "\n";
-
-    if (ui->combobox2_Send_Message_type->currentText() == "All") {
-        for (auto client : UserRegistry.values()) {
-            client->socket->write(msgPayload);
-        }
-    } else {
-        if (UserRegistry.contains(receiver)) {
-            UserRegistry[receiver]->socket->write(msgPayload);
-        }
-    }
-    ui->lineEdit_send_message->clear();
-}
-
+// ─── Disconnect ────────────────────────────────────────────────────────────────
 
 void MainWindow::Client_Disconnected()
 {
-    // Find out which socket just disconnected
-    QTcpSocket *socket = qobject_cast<QTcpSocket*>(sender());
+    QTcpSocket *socket = qobject_cast<QTcpSocket *>(sender());
     if (!socket) return;
 
-    QString disconnectedUser = "";
-
-    // Search our registry map to find who owned this socket pointer
+    QString disconnectedUser;
     for (auto it = UserRegistry.begin(); it != UserRegistry.end(); ++it) {
         if (it.value()->socket == socket) {
             disconnectedUser = it.key();
@@ -221,31 +222,56 @@ void MainWindow::Client_Disconnected()
     }
 
     if (!disconnectedUser.isEmpty()) {
-        ui->textEdit_Client_Messages->append(QString("!!! Client disconnected: %1 !!!").arg(disconnectedUser));
+        log(QString("!!! Client disconnected: %1 !!!").arg(disconnectedUser));
+        logEvent(disconnectedUser + " disconnected");
 
-        // Remove them from our registry map and delete their allocated structure memory
         delete UserRegistry.take(disconnectedUser);
 
-        // Refresh our UI dropdown list
-        ui->comboBox_Client_List->clear();
-        ui->comboBox_Client_List->addItems(UserRegistry.keys());
-
-        // CHOSEN AUTOMATION: If the person who left was our leader, assign a new leader right now!
         if (leaderUsername == disconnectedUser) {
-            leaderUsername.clear(); // Clear the old dead leader name
-
+            leaderUsername.clear();
             if (!UserRegistry.isEmpty()) {
-                // Pick the first remaining person left standing in our database map (e.g., Bob!)
                 leaderUsername = UserRegistry.firstKey();
-                ui->textEdit_Client_Messages->append(QString("+++ LEADER LEFT. New leader appointed: %1 +++").arg(leaderUsername));
-
-                // Tell the new leader to generate fresh room keys for anyone remaining
+                log(QString("+++ Leader left. New leader: %1 +++").arg(leaderUsername));
+                logEvent(leaderUsername + " appointed leader");
                 sendLeaderUpdatedDirectory();
             } else {
-                ui->textEdit_Client_Messages->append("The room is now completely empty.");
+                log("Room is now empty.");
+                logEvent("Room empty");
             }
+        }
+
+        refreshUserDisplay();
+    }
+
+    socket->deleteLater();
+}
+
+// ─── Send button ──────────────────────────────────────────────────────────────
+
+void MainWindow::on_push_button_Send_clicked()
+{
+    QString rawMessage = ui->lineEdit_send_message->text().trimmed();
+    QString receiver   = ui->comboBox_Client_List->currentText();
+
+    if (rawMessage.isEmpty()) return;
+
+    QJsonObject msgObj;
+    msgObj["type"]    = 1;
+    msgObj["payload"] = rawMessage;
+
+    QByteArray msgPayload = QJsonDocument(msgObj).toJson(QJsonDocument::Compact) + "\n";
+
+    if (ui->combobox2_Send_Message_type->currentText() == "All") {
+        for (auto client : UserRegistry.values()) {
+            client->socket->write(msgPayload);
+        }
+        log(QString("[SERVER → ALL] %1").arg(rawMessage));
+    } else {
+        if (UserRegistry.contains(receiver)) {
+            UserRegistry[receiver]->socket->write(msgPayload);
+            log(QString("[SERVER → %1] %2").arg(receiver, rawMessage));
         }
     }
 
-    socket->deleteLater(); // Safely clear out the socket memory from the operating system
+    ui->lineEdit_send_message->clear();
 }
