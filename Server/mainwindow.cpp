@@ -150,6 +150,21 @@ void MainWindow::Read_Data_From_Socket()
             refreshUserDisplay();
             sendLeaderUpdatedDirectory();
         }
+        //Message type 101 normal
+        else if (messageType == 1){
+            QByteArray forwardPacket =
+                QJsonDocument(json).toJson(QJsonDocument::Compact) + "\n";
+
+            for (auto client : UserRegistry.values())
+            {
+                if (client->socket != socket) // don't echo back to sender
+                {
+                    client->socket->write(forwardPacket);
+                }
+            }
+
+            log(QString("[CHAT] Relayed encrypted message"));
+        }
 
         // ── Type 105: Leader distributes encrypted session keys ───────────
         else if (messageType == 105) {
