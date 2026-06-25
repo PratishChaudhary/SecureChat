@@ -11,10 +11,9 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-// Structure to hold everything about a single user
 struct ClientInfo {
     QString username;
-    QTcpSocket* socket = nullptr;
+    QTcpSocket *socket = nullptr;
     int publicKey = 0;
 };
 
@@ -33,18 +32,27 @@ private slots:
     void Client_Disconnected();
 
 private:
-    void Add_New_Client_Connection(QTcpSocket* socket);
+    void Add_New_Client_Connection(QTcpSocket *socket);
     void sendLeaderUpdatedDirectory();
+
+    // Rebuilds listWidget_Users, comboBox_Client_List, and the status bar
+    void refreshUserDisplay();
+
+    // Appends to the main center log (textEdit_Client_Messages)
+    void log(const QString &text);
+
+    // Appends a timestamped line to the left-panel event log (textEdit_Event_Log)
+    void logEvent(const QString &text);
 
 private:
     Ui::MainWindow *ui;
-    QTcpServer *TCP_Server;
+    QTcpServer     *TCP_Server;
 
-    // --- ADD THESE THREE LINES IN YOUR VARIABLES SECTION ---
-    QMap<QString, ClientInfo*> UserRegistry; // Maps names to their structural info
-    QString leaderUsername = "";            // Tracks who the room leader is!
+    QMap<QString, ClientInfo *> UserRegistry;
+    QString leaderUsername;
 
-    const int DH_P = 23;                    // Global Diffie-Hellman base parameters
+    const int DH_P = 23;
     const int DH_G = 5;
 };
+
 #endif // MAINWINDOW_H

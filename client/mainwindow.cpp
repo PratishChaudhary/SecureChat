@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "ui_clientmainwindow.h"
+#include "ui_mainwindow.h"
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QJsonArray>

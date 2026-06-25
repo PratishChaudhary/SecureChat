@@ -1,16 +1,11 @@
 cmake_minimum_required(VERSION 3.16)
-
 project(Client VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# Tell AUTOUIC where to look for .ui files (in case it's not in the same dir)
-set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR})
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Network)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network)
@@ -19,7 +14,7 @@ set(PROJECT_SOURCES
     main.cpp
     mainwindow.cpp
     mainwindow.h
-    clientmainwindow.ui   # <-- renamed from mainwindow.ui to match the class name
+    mainwindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -38,7 +33,7 @@ endif()
 
 target_link_libraries(Client PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
-    Qt6::Network
+    Qt${QT_VERSION_MAJOR}::Network
 )
 
 if(${QT_VERSION} VERSION_LESS 6.1.0)

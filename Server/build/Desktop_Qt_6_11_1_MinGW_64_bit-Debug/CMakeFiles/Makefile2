@@ -81,8 +81,8 @@ clean: CMakeFiles/Server_autogen.dir/clean
 
 # All Build rule for target.
 CMakeFiles/Server.dir/all: CMakeFiles/Server_qmlimportscan.dir/all
-CMakeFiles/Server.dir/all: CMakeFiles/Server_autogen_timestamp_deps.dir/all
 CMakeFiles/Server.dir/all: CMakeFiles/Server_autogen.dir/all
+CMakeFiles/Server.dir/all: CMakeFiles/Server_autogen_timestamp_deps.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\genib\Desktop\PRGM\EndSemProject\II\SecureChat\Server\build\Desktop_Qt_6_11_1_MinGW_64_bit-Debug\CMakeFiles --progress-num=1,2,3,4,5 "Built target Server"
