@@ -6,62 +6,428 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>860</width>
-    <height>620</height>
+    <width>786</width>
+    <height>771</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>SecureChat — Client</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-QMainWindow {
-    background-color: #1a1d23;
-}
-QWidget#centralwidget {
-    background-color: #1a1d23;
-}
-QLabel#label_IdentityDisplay {
-    color: #7ecfb3;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 6px 10px;
-    background-color: #252930;
-    border-radius: 6px;
-    border: 1px solid #2e3340;
-}
-QTextEdit#textEdit_ChatDisplay {
-    background-color: #20242c;
-    color: #dde3ec;
-    font-size: 14px;
-    font-family: "Segoe UI", sans-serif;
-    border: 1px solid #2e3340;
-    border-radius: 8px;
-    padding: 8px;
-}
-QTextEdit#textEdit_Log {
-    background-color: #141720;
-    color: #5a8a72;
-    font-size: 11px;
-    font-family: "Consolas", "Courier New", monospace;
-    border: 1px solid #1e2230;
-    border-radius: 6px;
-    padding: 6px;
-}
-QLineEdit#lineEdit_ChatMsg {
-    background-color: #252930;
-    color: #dde3ec;
-    font-size: 14px;
-    border: 1px solid #3a4050;
-    border-radius: 8px;
-    padding: 8px 12px;
-    selection-background-color: #3d7a5e;
-}
-QLineEdit#lineEdit_ChatMsg:focus {
-    border: 1px solid #7ecfb3;
-}
-QPushButton#sendButton {
-    background-color: #3d7a5e;
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <widget class="QFrame" name="Window">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>-5</y>
+      <width>781</width>
+      <height>731</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+background:#0B0F14;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Shape::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Raised</enum>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="2">
+      <widget class="QFrame" name="Frame_SystemLog">
+       <property name="styleSheet">
+        <string notr="true">background-color:#151B22;
+border:0.5px solid #2A3445;
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <property name="leftMargin">
+           <number>9</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="Systemlog_icon">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border:none;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="resource.qrc">:/images/log.png</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_LogHeader">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Monotype Corsiva</family>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border :none;</string>
+            </property>
+            <property name="text">
+             <string>System Log</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="textEdit_Log">
+          <property name="styleSheet">
+           <string notr="true">border:none;
+background-color:#1A2028;</string>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QFrame" name="Chat">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:#151B22;
+border:0.5px solid #2A3445;</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="spacing">
+         <number>6</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <property name="leftMargin">
+           <number>9</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="chat_icon">
+            <property name="minimumSize">
+             <size>
+              <width>20</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border:none;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="resource.qrc">:/images/chat_icon.png</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="chat_label">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Monotype Corsiva</family>
+              <pointsize>18</pointsize>
+              <italic>true</italic>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+	border: none;
+    padding: 0px;
+    margin: 0px;
+}</string>
+            </property>
+            <property name="text">
+             <string>Chat</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="textEdit_ChatDisplay">
+          <property name="layoutDirection">
+           <enum>Qt::LayoutDirection::LeftToRight</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border:none;
+background-color:#1A2028;</string>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="3">
+      <widget class="QFrame" name="upperportion">
+       <property name="styleSheet">
+        <string notr="true">background-color:#11161C;
+border:none;</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="topMargin">
+           <number>9</number>
+          </property>
+          <property name="rightMargin">
+           <number>9</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="secure_icon">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>44</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>44</width>
+              <height>44</height>
+             </size>
+            </property>
+            <property name="sizeIncrement">
+             <size>
+              <width>8</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="accessibleDescription">
+             <string/>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="resource.qrc">:/images/images.png</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="font">
+             <font>
+              <family>Monotype Corsiva</family>
+              <pointsize>18</pointsize>
+              <italic>true</italic>
+             </font>
+            </property>
+            <property name="text">
+             <string>Secure Chat </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_IdentityDisplay">
+            <property name="styleSheet">
+             <string notr="true">border : 0.5px solid rgb(36, 59, 76);
+border-radius:10px;</string>
+            </property>
+            <property name="text">
+             <string>Connecting...</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="2" column="0" colspan="4">
+      <widget class="QFrame" name="frame">
+       <property name="styleSheet">
+        <string notr="true">border:none;</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLineEdit" name="lineEdit_ChatMsg">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>45</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>45</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+border: 1px solid #3a4050;
+ border-radius: 8px;
+ padding: 8px 12px;
+ 
+border :  1px solid  rgb(0, 85, 127);
+border-radius:10px;</string>
+          </property>
+          <property name="placeholderText">
+           <string>Type a message...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="sendButton">
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>45</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#sendButton {
+    background-color: rgb(29, 156, 158);
     color: #ffffff;
     font-size: 14px;
     font-weight: bold;
@@ -75,148 +441,33 @@ QPushButton#sendButton:hover {
 QPushButton#sendButton:pressed {
     background-color: #2d6a4e;
 }
-QLabel#label_ChatHeader {
-    color: #7ecfb3;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-QLabel#label_LogHeader {
-    color: #4a6a58;
-    font-size: 11px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-   </string>
-  </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_Main">
-    <property name="spacing">
-     <number>10</number>
-    </property>
-    <property name="leftMargin">
-     <number>14</number>
-    </property>
-    <property name="topMargin">
-     <number>12</number>
-    </property>
-    <property name="rightMargin">
-     <number>14</number>
-    </property>
-    <property name="bottomMargin">
-     <number>12</number>
-    </property>
-    <!-- Top: Identity bar -->
-    <item>
-     <widget class="QLabel" name="label_IdentityDisplay">
-      <property name="text">
-       <string>Connecting...</string>
-      </property>
-      <property name="minimumHeight">
-       <number>36</number>
-      </property>
-     </widget>
-    </item>
-    <!-- Middle: Chat + Log side by side -->
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_Middle">
-      <property name="spacing">
-       <number>10</number>
-      </property>
-      <!-- Left: Chat area -->
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_Chat">
-        <property name="spacing">
-         <number>4</number>
-        </property>
-        <item>
-         <widget class="QLabel" name="label_ChatHeader">
-          <property name="text">
-           <string>CHAT</string>
+</string>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTextEdit" name="textEdit_ChatDisplay">
-          <property name="readOnly">
-           <bool>true</bool>
+          <property name="text">
+           <string>Send</string>
           </property>
          </widget>
         </item>
        </layout>
-      </item>
-      <!-- Right: System log -->
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_Log">
-        <property name="spacing">
-         <number>4</number>
-        </property>
-        <item>
-         <widget class="QLabel" name="label_LogHeader">
-          <property name="text">
-           <string>SYSTEM LOG</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTextEdit" name="textEdit_Log">
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-          <property name="maximumWidth">
-           <number>280</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </item>
-    <!-- Bottom: Input row -->
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_Input">
-      <property name="spacing">
-       <number>8</number>
-      </property>
-      <item>
-       <widget class="QLineEdit" name="lineEdit_ChatMsg">
-        <property name="placeholderText">
-         <string>Type a message...</string>
-        </property>
-        <property name="minimumHeight">
-         <number>42</number>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="sendButton">
-        <property name="text">
-         <string>Send</string>
-        </property>
-        <property name="minimumHeight">
-         <number>42</number>
-        </property>
-        <property name="maximumWidth">
-         <number>100</number>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-   </layout>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>860</width>
-     <height>26</height>
+     <width>786</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

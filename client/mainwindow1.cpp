@@ -6,6 +6,7 @@
 #include <QLineEdit>
 #include <QIcon>
 #include <QAction>
+#include "ui_mainwindow.h"
 mainwindow1::mainwindow1(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::mainwindow1)
@@ -56,8 +57,6 @@ mainwindow1::mainwindow1(QWidget *parent)
     QPixmap image_port(":/images/port.png");
     ui->label_image_2->setPixmap(image_port);
     ui->label_image_2->setPixmap(image_port.scaled(90,60,Qt::KeepAspectRatio , Qt::SmoothTransformation));
-
-
 
 
 

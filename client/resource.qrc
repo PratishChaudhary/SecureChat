@@ -5,5 +5,7 @@
         <file>images/images.png</file>
         <file>images/port.png</file>
         <file>images/icon.png</file>
+        <file>images/chat_icon.png</file>
+        <file>images/log.png</file>
     </qresource>
 </RCC>
