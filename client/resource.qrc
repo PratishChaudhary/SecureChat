@@ -7,5 +7,6 @@
         <file>images/icon.png</file>
         <file>images/chat_icon.png</file>
         <file>images/log.png</file>
+        <file>images/Secure.jpg</file>
     </qresource>
 </RCC>
