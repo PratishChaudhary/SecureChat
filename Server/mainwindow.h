@@ -6,7 +6,19 @@
 #include <QTcpSocket>
 #include <QMap>
 #include <QString>
+#include <QMutex>
 
+enum PacketType {
+    LEADER_KEY_SETUP = 101,
+    CLIENT_REGISTRATION = 102,
+    NORMAL_MESSAGE = 1,
+    DIRECTORY_UPDATE = 104,
+    KEY_DISTRIBUTION = 105
+};
+
+private:
+    QMutex registryMutex;
+    QMap<QTcpSocket*, QString> socketToUsername; // Reverse lookup
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
