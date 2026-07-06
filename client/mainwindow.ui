@@ -109,8 +109,9 @@ border:0.5px solid #2A3445;
               </property>
               <property name="font">
                <font>
-                <family>Monotype Corsiva</family>
-                <pointsize>18</pointsize>
+                <family>Javanese Text</family>
+                <pointsize>14</pointsize>
+                <bold>true</bold>
                </font>
               </property>
               <property name="styleSheet">
@@ -223,9 +224,10 @@ border:0.5px solid #2A3445;</string>
               </property>
               <property name="font">
                <font>
-                <family>Monotype Corsiva</family>
-                <pointsize>18</pointsize>
-                <italic>true</italic>
+                <family>Javanese Text</family>
+                <pointsize>14</pointsize>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="styleSheet">
@@ -244,6 +246,12 @@ border:0.5px solid #2A3445;</string>
           </item>
           <item>
            <widget class="QTextEdit" name="textEdit_ChatDisplay">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="layoutDirection">
              <enum>Qt::LayoutDirection::LeftToRight</enum>
             </property>
@@ -342,9 +350,9 @@ border:none;</string>
              <widget class="QLabel" name="label">
               <property name="font">
                <font>
-                <family>Monotype Corsiva</family>
+                <family>Javanese Text</family>
                 <pointsize>18</pointsize>
-                <italic>true</italic>
+                <italic>false</italic>
                </font>
               </property>
               <property name="text">
@@ -354,6 +362,11 @@ border:none;</string>
             </item>
             <item>
              <widget class="QLabel" name="label_IdentityDisplay">
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
               <property name="styleSheet">
                <string notr="true">border : 0.5px solid rgb(36, 59, 76);
 border-radius:10px;</string>
@@ -400,6 +413,11 @@ border-radius:10px;</string>
               <height>45</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
             <property name="styleSheet">
              <string notr="true">
 border: 1px solid #3a4050;
@@ -422,11 +440,17 @@ border-radius:10px;</string>
               <height>45</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>-1</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="styleSheet">
              <string notr="true">QPushButton#sendButton {
     background-color: rgb(29, 156, 158);
     color: #ffffff;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     border: none;
     border-radius: 8px;
@@ -455,6 +479,7 @@ QPushButton#sendButton:pressed {
   </widget>
  </widget>
  <resources>
+  <include location="resource.qrc"/>
   <include location="resource.qrc"/>
  </resources>
  <connections/>
