@@ -5,6 +5,7 @@
 #include <QTcpSocket>
 #include <QString>
 #include "QtEncryptionEngine.h"
+#include <QTime>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ClientMainWindow; }
@@ -25,13 +26,13 @@ private slots:
     void on_sendButton_clicked();
     void onSocketReadyRead();
     void onSocketDisconnected();
+    void addlog(const QString &message);
 
 private:
     Ui::ClientMainWindow *ui;
     QTcpSocket *socket;
     QtEncryptionEngine cryptoEngine;
     QString myUsername;
-
     // Whether the room key is ready for encrypting/decrypting chat
     bool roomKeyReady = false;
 };

@@ -25,6 +25,13 @@ ClientMainWindow::~ClientMainWindow()
 {
     delete ui;
 }
+void ClientMainWindow::addlog(const QString &message)
+{
+    QString time  =  QTime::currentTime().toString("hh:mm:ss");
+    ui->textEdit_Log->append(
+        QString("[%1] %2").arg(time,message));
+}
+
 
 // ─── Called by main() right after the window is constructed ──────────────────
 void ClientMainWindow::setSessionUsername(const QString& username)
@@ -32,7 +39,7 @@ void ClientMainWindow::setSessionUsername(const QString& username)
     //takes username and sets myUsername 
     myUsername = username;
     setWindowTitle("SecureChat — " + myUsername);
-    ui->label_IdentityDisplay->setText("Logged in as:  " + myUsername);
+    ui->label_IdentityDisplay->setText(myUsername);
     ui->textEdit_Log->append("Connecting to 127.0.0.1:8080...");
 
     //calls connectToHost for the QTcpSocket object.
@@ -40,10 +47,13 @@ void ClientMainWindow::setSessionUsername(const QString& username)
 
     //checking if the server is listening for new clients.
     if (!socket->waitForConnected(3000)) {
-        ui->textEdit_Log->append("❌  Cannot reach server. Start the Server app first, then relaunch the client.");
-        ui->label_IdentityDisplay->setText("Logged in as:  " + myUsername + "  |  ⚠ Offline");
+        addlog("❌  Cannot reach server. Start the Server app first, then relaunch the client.");
+        // ui->textEdit_Log->append("❌  Cannot reach server. Start the Server app first, then relaunch the client.");
+        addlog("Logged in as:  " + myUsername + "  |  ⚠ Offline");
+        // ui->label_IdentityDisplay->setText("Logged in as:  " + myUsername + "  |  ⚠ Offline");
     } else {
-        ui->textEdit_Log->append("✔  Connected. Waiting for handshake...");
+        addlog("✔  Connected. Waiting for handshake...");
+        // ui->textEdit_Log->append("✔  Connected. Waiting for handshake...");
     }
 }
 
@@ -89,13 +99,15 @@ void ClientMainWindow::onSocketReadyRead()
 
         // ── Packet 104: We are the room leader — generate & distribute keys ─
         else if (type == 104) {
-            ui->textEdit_Log->append("⭐  You are the room leader. Generating session keys...");
+            addlog("⭐  You are the room leader. Generating session keys...");
+            // ui->textEdit_Log->append("⭐  You are the room leader. Generating session keys...");
             QJsonArray peers = json["participants"].toArray();
 
             if (peers.isEmpty()) {
                 // Leader is alone; generate a key for ourselves so we can chat
                 // when peers join later the key will be re-sent automatically.
-                ui->textEdit_Log->append("ℹ  No peers yet. Key will be distributed when others join.");
+                addlog("ℹ  No peers yet. Key will be distributed when others join.");
+                // ui->textEdit_Log->append("ℹ  No peers yet. Key will be distributed when others join.");
                 // Generate room key locally so leader can still type when alone
                 cryptoEngine.generateRawRoomKey();
                 roomKeyReady = true;
@@ -124,7 +136,8 @@ void ClientMainWindow::onSocketReadyRead()
             ui->sendButton->setEnabled(true);
             ui->lineEdit_ChatMsg->setEnabled(true);
             ui->lineEdit_ChatMsg->setPlaceholderText("Type a message...");
-            ui->textEdit_Log->append("🔒  Session key received. Chat is now encrypted.");
+            addlog("🔒  Session key received. Chat is now encrypted.");
+            // ui->textEdit_Log->append("🔒  Session key received. Chat is now encrypted.");
         }
 
         // ── Packet 1: Incoming chat message ───────────────────────────────
@@ -150,7 +163,8 @@ void ClientMainWindow::on_sendButton_clicked()
     if (text.isEmpty()) return;
     //checks if the encryption is done
     if (!roomKeyReady) {
-        ui->textEdit_Log->append("⚠  Key not ready yet — please wait.");
+        addlog("⚠  Key not ready yet — please wait.");
+        // ui->textEdit_Log->append("⚠  Key not ready yet — please wait.");
         return;
     }
     //combining username and the message
@@ -178,6 +192,7 @@ void ClientMainWindow::onSocketDisconnected()
     ui->sendButton->setEnabled(false);
     ui->lineEdit_ChatMsg->setEnabled(false);
     ui->lineEdit_ChatMsg->setPlaceholderText("Disconnected from server.");
-    ui->textEdit_Log->append("❌  Connection closed by server.");
+    addlog("❌  Connection closed by server.");
+    // ui->textEdit_Log->append("❌  Connection closed by server.");
     ui->label_IdentityDisplay->setText(ui->label_IdentityDisplay->text() + "  |  ⚠ Disconnected");
 }

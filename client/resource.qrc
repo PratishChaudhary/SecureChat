@@ -7,5 +7,8 @@
         <file>images/icon.png</file>
         <file>images/chat_icon.png</file>
         <file>images/log.png</file>
+        <file>images/user.png</file>
+        <file>images/chat.png</file>
+        <file>images/systemlog.png</file>
     </qresource>
 </RCC>
