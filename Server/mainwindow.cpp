@@ -25,7 +25,8 @@ MainWindow::MainWindow(QWidget *parent)
         statusBar()->showMessage("Server failed to start");
     }
 }
-
+// Destructor: Releases dynamically allocated client information
+// and cleans up the user interface.
 MainWindow::~MainWindow()
 {
     qDeleteAll(UserRegistry);
