@@ -230,7 +230,9 @@ void MainWindow::sendLeaderUpdatedDirectory()
 }
 
 // ─── Disconnect ────────────────────────────────────────────────────────────────
-
+// Removes disconnected clients from the registry,
+// updates the leader if necessary,
+// and refreshes the user interface.
 void MainWindow::Client_Disconnected()
 {
     QTcpSocket *socket = qobject_cast<QTcpSocket *>(sender());
