@@ -22,6 +22,7 @@ mainwindow1::~mainwindow1(){}
 void mainwindow1::on_Login_clicked()
 {
     QString username = ui->lineEdit_username->text();
+    QString HAddr = ui->lineEdit_Port->text();
     int Port = ui->lineEdit_Port->text().toInt();
     ClientMainWindow *client = new ClientMainWindow();
     if(!username.isEmpty())
