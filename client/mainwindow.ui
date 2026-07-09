@@ -512,7 +512,7 @@ background-color:none;</string>
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>30</height>
+                      <height>34</height>
                      </size>
                     </property>
                     <property name="maximumSize">
@@ -657,7 +657,7 @@ border:1px solid #2A3445;</string>
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>30</height>
+                      <height>34</height>
                      </size>
                     </property>
                     <property name="maximumSize">
@@ -738,18 +738,27 @@ border-right:none;
           <enum>QFrame::Shadow::Raised</enum>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="spacing">
+           <number>8</number>
+          </property>
           <property name="leftMargin">
-           <number>11</number>
+           <number>12</number>
+          </property>
+          <property name="topMargin">
+           <number>8</number>
           </property>
           <property name="rightMargin">
-           <number>11</number>
+           <number>12</number>
+          </property>
+          <property name="bottomMargin">
+           <number>8</number>
           </property>
           <item>
            <widget class="QLineEdit" name="lineEdit_ChatMsg">
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>60</height>
+              <height>52</height>
              </size>
             </property>
             <property name="maximumSize">
@@ -762,8 +771,8 @@ border-right:none;
              <string notr="true">
 border: 1px solid #3a4050;
  border-radius: 8px;
- padding: 8px 12px;
- 
+ padding-left:12px;
+padding-right:12px;
 border :  1px solid  rgb(0, 85, 127);
 border-radius:10px;</string>
             </property>
@@ -774,27 +783,31 @@ border-radius:10px;</string>
           </item>
           <item>
            <widget class="QPushButton" name="sendButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
-              <width>100</width>
-              <height>60</height>
+              <width>90</width>
+              <height>52</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton#sendButton {
-    background-color: rgb(29, 156, 158);
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
+    background:#22b8c7;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
 }
 QPushButton#sendButton:hover {
-    background-color: #4d9a74;
+    background-color: #32d0df;
 }
 QPushButton#sendButton:pressed {
-    background-color: #2d6a4e;
+    background-color: #1699a7;
 }
 </string>
             </property>
