@@ -36,7 +36,8 @@ MainWindow::~MainWindow()
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-// Appends a timestamped line to the compact event log on the left panel
+// Adds a timestamped event to the event log panel.
+// Used for connection, disconnection, and leader updates.
 void MainWindow::logEvent(const QString &text)
 {
     QString ts = QDateTime::currentDateTime().toString("hh:mm");
