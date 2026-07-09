@@ -201,7 +201,8 @@ void MainWindow::Read_Data_From_Socket()
 }
 
 // ─── Leader directory push ─────────────────────────────────────────────────────
-
+// Sends the updated participant list to the current leader.
+// The leader uses this information for key distribution.
 void MainWindow::sendLeaderUpdatedDirectory()
 {
     if (leaderUsername.isEmpty() || !UserRegistry.contains(leaderUsername)) {
