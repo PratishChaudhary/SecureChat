@@ -88,7 +88,7 @@ void MainWindow::Add_New_Client_Connection(QTcpSocket *socket)
     connect(socket, &QTcpSocket::disconnected, this, &MainWindow::Client_Disconnected);
 
     QJsonObject packet101;
-    packet101["type"]    = 101;
+    packet101["type"]    = LEADER_KEY_SETUP;
     packet101["p_value"] = DH_P;
     packet101["g_value"] = DH_G;
 
@@ -101,13 +101,10 @@ void MainWindow::Add_New_Client_Connection(QTcpSocket *socket)
 void MainWindow::Read_Data_From_Socket()
 {
     QTcpSocket *socket = qobject_cast<QTcpSocket *>(sender());
-
     if (!socket) return;
-    QByteArray rawIncomingStream = socket->readAll();
-    QList<QByteArray> segmentedPackets = rawIncomingStream.split('\n');
 
-    for (const QByteArray &rawPacket : segmentedPackets) {
-        QByteArray cleanPacket = rawPacket.trimmed();
+    while (socket->canReadLine()) {
+        QByteArray cleanPacket = socket->readLine().trimmed();
         if (cleanPacket.isEmpty()) continue;
 
         QJsonParseError parseError;
@@ -129,7 +126,11 @@ void MainWindow::Read_Data_From_Socket()
             if (name.isEmpty()) continue;
 
             if (UserRegistry.contains(name)) {
-                delete UserRegistry.take(name);
+                ClientInfo *oldInfo = UserRegistry.take(name);
+                if (oldInfo) {
+                    socketToUsername.remove(oldInfo->socket);
+                    delete oldInfo;
+                }
             }
 
             ClientInfo *info  = new ClientInfo();
@@ -137,6 +138,7 @@ void MainWindow::Read_Data_From_Socket()
             info->socket      = socket;
             info->publicKey   = clientPubKey;
             UserRegistry[name] = info;
+            socketToUsername[socket] = name;
 
             log(QString("Registered: %1 (key: %2)").arg(name).arg(clientPubKey));
             logEvent(name + " connected");
@@ -180,7 +182,7 @@ void MainWindow::Read_Data_From_Socket()
 
                 if (UserRegistry.contains(targetUser)) {
                     QJsonObject dispatchPacket;
-                    dispatchPacket["type"]             = ;
+                    dispatchPacket["type"]             = KEY_DISTRIBUTION;
                     dispatchPacket["leader_public_key"] = leaderPubKey;
                     dispatchPacket["encrypted_key"]    = encryptedKeyHex;
 
@@ -203,7 +205,7 @@ void MainWindow::sendLeaderUpdatedDirectory()
     }
 
     QJsonObject packet104;
-    packet104["type"] = 104;
+    packet104["type"] = DIRECTORY_UPDATE;
 
     QJsonArray participantsArray;
     for (auto it = UserRegistry.cbegin(); it != UserRegistry.cend(); ++it) {
@@ -228,13 +230,7 @@ void MainWindow::Client_Disconnected()
     QTcpSocket *socket = qobject_cast<QTcpSocket *>(sender());
     if (!socket) return;
 
-    QString disconnectedUser;
-    for (auto it = UserRegistry.begin(); it != UserRegistry.end(); ++it) {
-        if (it.value()->socket == socket) {
-            disconnectedUser = it.key();
-            break;
-        }
-    }
+    QString disconnectedUser = socketToUsername.take(socket);
 
     if (!disconnectedUser.isEmpty()) {
         log(QString("!!! Client disconnected: %1 !!!").arg(disconnectedUser));
@@ -256,9 +252,9 @@ void MainWindow::Client_Disconnected()
         }
 
         refreshUserDisplay();
+    } else {
+        socket->deleteLater();
     }
-
-    socket->deleteLater();
 }
 
 // ─── Send button ──────────────────────────────────────────────────────────────

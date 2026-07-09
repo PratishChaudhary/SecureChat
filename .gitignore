@@ -1,0 +1,4 @@
+#ignoring qt creator
+.qtcreator
+
+.vscode

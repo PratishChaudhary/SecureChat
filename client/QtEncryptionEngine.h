@@ -35,6 +35,7 @@ public:
     }
 
     long long modPow(long long base, long long exp, long long mod) {
+        if (mod <= 0) return 0;
         long long result = 1;
         base = base % mod;
         while (exp > 0) {

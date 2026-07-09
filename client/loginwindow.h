@@ -1,9 +1,7 @@
-#ifndef MAINWINDOW1_H
-#define MAINWINDOW1_H
+#ifndef LOGINWINDOW_H
+#define LOGINWINDOW_H
 
 #include <QDialog>
-#include "mainwindow.h"
-#include "mainwindow1.h"
 
 namespace Ui {
 class mainwindow1;
@@ -25,4 +23,4 @@ private:
 
 };
 
-#endif // MAINWINDOW1_H
+#endif // LOGINWINDOW_H

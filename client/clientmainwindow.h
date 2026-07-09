@@ -20,7 +20,7 @@ public:
     ~ClientMainWindow();
 
     // Called from main() after username is collected
-    void setSessionUsername(const QString& username);
+    void setSessionUsername(const QString& username, const QString& HAddr);
 
 private slots:
     void on_sendButton_clicked();
