@@ -50,8 +50,8 @@ void MainWindow::log(const QString &text)
     ui->textEdit_Client_Messages->append(text);
 }
 
-// Rebuilds the user list widget in the left panel and the target combobox in the send bar.
-// Called whenever UserRegistry changes.
+/// Refreshes the connected user list, updates the receiver
+// selection box, and displays the latest server status.
 void MainWindow::refreshUserDisplay()
 {
     // ── Left panel list widget ────────────────────────────────────────────
