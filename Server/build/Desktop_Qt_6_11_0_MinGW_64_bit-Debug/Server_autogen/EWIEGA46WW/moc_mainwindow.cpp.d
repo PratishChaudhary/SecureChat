@@ -1,6 +1,7 @@
 C:/Users/ACER/Desktop/securechat1/SecureChat/Server/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug/Server_autogen/EWIEGA46WW/moc_mainwindow.cpp: C:/Users/ACER/Desktop/securechat1/SecureChat/Server/mainwindow.h \
   C:/Users/ACER/Desktop/securechat1/SecureChat/Server/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug/Server_autogen/moc_predefs.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/QMap \
+  D:/qt_framework/6.11.0/mingw_64/include/QtCore/QMutex \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/QString \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/q17memory.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/q20bit.h \
@@ -40,6 +41,7 @@ C:/Users/ACER/Desktop/securechat1/SecureChat/Server/build/Desktop_Qt_6_11_0_MinG
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qcontiguouscache.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qdarwinhelpers.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qdatastream.h \
+  D:/qt_framework/6.11.0/mingw_64/include/QtCore/qdeadlinetimer.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qdebug.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qendian.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qexceptionhandling.h \
@@ -68,6 +70,7 @@ C:/Users/ACER/Desktop/securechat1/SecureChat/Server/build/Desktop_Qt_6_11_0_MinG
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qmetacontainer.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qmetatype.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qminmax.h \
+  D:/qt_framework/6.11.0/mingw_64/include/QtCore/qmutex.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qnamespace.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qnumeric.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qobject.h \
@@ -119,6 +122,7 @@ C:/Users/ACER/Desktop/securechat1/SecureChat/Server/build/Desktop_Qt_6_11_0_MinG
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qtnoop.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qtpreprocessorsupport.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qtresource.h \
+  D:/qt_framework/6.11.0/mingw_64/include/QtCore/qtsan_impl.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qttranslation.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qttypetraits.h \
   D:/qt_framework/6.11.0/mingw_64/include/QtCore/qtversion.h \

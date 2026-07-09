@@ -392,7 +392,7 @@ border-radius:10px;</string>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_Port">
+            <widget class="QLineEdit" name="lineEdit_address">
              <property name="maximumSize">
               <size>
                <width>16777215</width>
@@ -406,7 +406,7 @@ border-radius:10px;</string>
               <string/>
              </property>
              <property name="placeholderText">
-              <string>Port</string>
+              <string>Address</string>
              </property>
             </widget>
            </item>

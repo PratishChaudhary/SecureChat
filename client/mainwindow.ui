@@ -26,7 +26,7 @@
    <property name="styleSheet">
     <string notr="true">background-color:black;</string>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_6">
+   <layout class="QVBoxLayout" name="verticalLayout_6">
     <item>
      <widget class="QFrame" name="Window">
       <property name="styleSheet">
@@ -378,7 +378,7 @@ border:1px solid #2A3445;</string>
          <property name="frameShadow">
           <enum>QFrame::Shadow::Raised</enum>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0,3">
           <property name="spacing">
            <number>20</number>
           </property>
@@ -392,19 +392,19 @@ border:1px solid #2A3445;</string>
            <widget class="QFrame" name="Chat">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
+              <horstretch>5</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="minimumSize">
              <size>
-              <width>600</width>
+              <width>0</width>
               <height>0</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>700</width>
+              <width>16777215</width>
               <height>16777215</height>
              </size>
             </property>
@@ -436,9 +436,15 @@ border:1px solid #2A3445;</string>
              </property>
              <item>
               <widget class="QFrame" name="Chatandlogoframe">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
-                 <width>500</width>
+                 <width>0</width>
                  <height>0</height>
                 </size>
                </property>
@@ -688,29 +694,31 @@ background-color:#0B0F14;
               </widget>
              </item>
              <item>
-              <widget class="QTextEdit" name="textEdit_Log">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
+              <widget class="QListWidget" name="systemLog">
                <property name="styleSheet">
-                <string notr="true">border-radius:0px;
-border-top: 1px solid #2A3445;
-border-bottom:none;
-border-left:none;
-border-right:none;
-</string>
-               </property>
-               <property name="readOnly">
-                <bool>true</bool>
+                <string notr="true">QListWidget
+{
+	border-radius:0px;
+	border-top: 1px solid #2A3445;
+	border-bottom:none;
+	border-left:none;
+	border-right:none;
+    color: white;
+    outline: none;
+    font-size: 11pt;
+}
+
+QListWidget::item
+{
+    border-bottom: 1px solid rgb(42, 48, 58);
+    padding: 12px;
+}
+
+QListWidget::item:selected
+{
+    background: transparent;
+    color: white;
+}</string>
                </property>
               </widget>
              </item>

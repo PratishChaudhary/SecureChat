@@ -399,6 +399,10 @@ CMakeFiles/Server.dir/Server_autogen/mocs_compilation.cpp.obj: \
  D:/qt_framework/6.11.0/mingw_64/include/QtNetwork/qtcpsocket.h \
  D:/qt_framework/6.11.0/mingw_64/include/QtCore/QMap \
  D:/qt_framework/6.11.0/mingw_64/include/QtCore/QString \
+ D:/qt_framework/6.11.0/mingw_64/include/QtCore/QMutex \
+ D:/qt_framework/6.11.0/mingw_64/include/QtCore/qmutex.h \
+ D:/qt_framework/6.11.0/mingw_64/include/QtCore/qdeadlinetimer.h \
+ D:/qt_framework/6.11.0/mingw_64/include/QtCore/qtsan_impl.h \
  D:/qt_framework/6.11.0/mingw_64/include/QtCore/qtmochelpers.h \
  D:/qt_framework/6.11.0/mingw_64/include/QtCore/qtmocconstants.h \
  D:/qt_framework/6.11.0/mingw_64/include/QtCore/q20algorithm.h

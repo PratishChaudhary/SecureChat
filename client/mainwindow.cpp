@@ -25,12 +25,20 @@ ClientMainWindow::~ClientMainWindow()
 {
     delete ui;
 }
+
 void ClientMainWindow::addlog(const QString &message)
 {
     QString time  =  QTime::currentTime().toString("hh:mm:ss");
-    ui->textEdit_Log->append(
-        QString("[%1] %2").arg(time,message));
+    QString LogEntry = QString("[%1] %2").arg(time).arg(message);
+
+    ui->systemLog->addItem(LogEntry);
+    ui->systemLog->scrollToBottom();
 }
+
+// void ClientMainWindow::addmessage(const QString &message)
+// {
+
+// }
 
 
 // ─── Called by main() right after the window is constructed ──────────────────
@@ -40,7 +48,8 @@ void ClientMainWindow::setSessionUsername(const QString& username)
     myUsername = username;
     setWindowTitle("SecureChat — " + myUsername);
     ui->label_IdentityDisplay->setText(myUsername);
-    ui->textEdit_Log->append("Connecting to 127.0.0.1:8080...");
+    addlog("Connecting to 127.0.0.1:8080...");
+    // ui->textEdit_Log->append("Connecting to 127.0.0.1:8080...");
 
     //calls connectToHost for the QTcpSocket object.
     socket->connectToHost("127.0.0.1", 8080);
@@ -74,7 +83,8 @@ void ClientMainWindow::onSocketReadyRead()
         QJsonDocument doc = QJsonDocument::fromJson(clean, &err);
         //checking for parsing errors:
         if (err.error != QJsonParseError::NoError || doc.isNull()) {
-            ui->textEdit_Log->append("⚠  Dropped malformed packet.");
+            addlog("⚠  Dropped malformed packet.");
+            // ui->textEdit_Log->append("⚠  Dropped malformed packet.");
             continue;
         }
         //creating a json object to store data.
@@ -94,7 +104,8 @@ void ClientMainWindow::onSocketReadyRead()
             reg["public_key"] = myPubKey;
             //sending back public key to enable secrete messagaing.
             socket->write(QJsonDocument(reg).toJson(QJsonDocument::Compact) + "\n");
-            ui->textEdit_Log->append(QString("🔑  DH handshake done. Public key: %1").arg(myPubKey));
+            addlog(QString(QString("🔑  DH handshake done. Public key: %1").arg(myPubKey)));
+            // ui->textEdit_Log->append(QString("🔑  DH handshake done. Public key: %1").arg(myPubKey));
         }
 
         // ── Packet 104: We are the room leader — generate & distribute keys ─
@@ -122,7 +133,8 @@ void ClientMainWindow::onSocketReadyRead()
                 ui->sendButton->setEnabled(true);
                 ui->lineEdit_ChatMsg->setEnabled(true);
                 ui->lineEdit_ChatMsg->setPlaceholderText("Type a message...");
-                ui->textEdit_Log->append(QString("✔  Session keys sent to %1 peer(s).").arg(peers.size()));
+                addlog(QString("✔  Session keys sent to %1 peer(s).").arg(peers.size()));
+                // ui->textEdit_Log->append(QString("✔  Session keys sent to %1 peer(s).").arg(peers.size()));
             }
         }
 

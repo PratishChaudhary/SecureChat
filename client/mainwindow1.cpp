@@ -16,17 +16,13 @@ mainwindow1::mainwindow1(QWidget *parent)
     this->QWidget::setWindowTitle("Secure Chat");
 
 }
-
-mainwindow1::~mainwindow1(){}
-
 void mainwindow1::on_Login_clicked()
 {
     QString username = ui->lineEdit_username->text();
-    int Port = ui->lineEdit_Port->text().toInt();
+    QString address = ui->lineEdit_address->text();
     ClientMainWindow *client = new ClientMainWindow();
     if(!username.isEmpty())
     {
-    //genius work with the port
         //using the process of non model method
         hide();
         client->setSessionUsername(username);
@@ -34,6 +30,10 @@ void mainwindow1::on_Login_clicked()
         close();
 
     }
-    else QMessageBox::information(this , "Noob" , "uh , No username entered");
+    else QMessageBox::information(this , "Username" , "No username entered");
 
 }
+
+mainwindow1::~mainwindow1(){}
+
+
