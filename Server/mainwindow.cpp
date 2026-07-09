@@ -6,6 +6,8 @@
 #include <QDateTime>
 #include <QListWidgetItem>
 
+// Constructor: Initializes the UI, creates the TCP server,
+// connects the newConnection signal, and starts listening on port 8080.
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
