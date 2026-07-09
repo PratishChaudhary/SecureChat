@@ -86,7 +86,8 @@ void MainWindow::newConnection()
         Add_New_Client_Connection(TCP_Server->nextPendingConnection());
     }
 }
-
+// Sets up signal-slot connections for a newly connected client
+// and sends the initial Diffie-Hellman parameters.
 void MainWindow::Add_New_Client_Connection(QTcpSocket *socket)
 {
     connect(socket, &QTcpSocket::readyRead,    this, &MainWindow::Read_Data_From_Socket);
