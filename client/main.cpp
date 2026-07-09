@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     mainwindow1 login;
     login.show();
 
-
+//
 
     // bool ok = false;
     // QString username = QInputDialog::getText(
