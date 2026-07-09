@@ -103,7 +103,8 @@ void MainWindow::Add_New_Client_Connection(QTcpSocket *socket)
 }
 
 // ─── Incoming data ─────────────────────────────────────────────────────────────
-
+// Reads incoming JSON packets from clients,
+// validates them, and processes them according to message type.
 void MainWindow::Read_Data_From_Socket()
 {
     QTcpSocket *socket = qobject_cast<QTcpSocket *>(sender());
