@@ -44,7 +44,7 @@ void MainWindow::logEvent(const QString &text)
     ui->textEdit_Event_Log->append(QString("[%1] %2").arg(ts, text));
 }
 
-// Appends a line to the main server message log in the center panel
+// Displays server messages in the main log window.
 void MainWindow::log(const QString &text)
 {
     ui->textEdit_Client_Messages->append(text);
