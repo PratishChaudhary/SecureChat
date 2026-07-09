@@ -78,7 +78,8 @@ void MainWindow::refreshUserDisplay()
 }
 
 // ─── Connection handling ───────────────────────────────────────────────────────
-
+// Handles every incoming TCP connection request.
+// Each pending connection is passed for initialization.
 void MainWindow::newConnection()
 {
     while (TCP_Server->hasPendingConnections()) {
