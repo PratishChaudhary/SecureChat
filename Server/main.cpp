@@ -3,6 +3,7 @@
 // Entry point of the application.
 // Creates the QApplication object, initializes the main window,
 // and starts the Qt event loop.
+// -----------------------------------------------------------------------------
 #include "mainwindow.h"
 #include <QApplication>
 
