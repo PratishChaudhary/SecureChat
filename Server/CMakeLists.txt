@@ -32,7 +32,7 @@ set(PROJECT_SOURCES
         mainwindow.h
         mainwindow.ui
 )
-
+# Create the executable depending on the installed Qt version.
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Server
         MANUAL_FINALIZATION
