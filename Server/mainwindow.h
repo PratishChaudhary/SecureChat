@@ -7,6 +7,8 @@
 #include <QMap>
 #include <QString>
 #include <QMutex>
+#include <QUdpSocket>
+#include <QTimer>
 
 enum PacketType {
     LEADER_KEY_SETUP = 101,
@@ -53,7 +55,6 @@ private:
     void refreshUserDisplay();
     void log(const QString &text);
     void logEvent(const QString &text);
-
 private:
     Ui::MainWindow *ui;
     QTcpServer *TCP_Server;

@@ -8,7 +8,6 @@
 #include <QNetworkInterface>
 #include <QNetworkAddressEntry>
 
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -47,7 +46,6 @@ MainWindow::MainWindow(QWidget *parent)
                     if(interface.humanReadableName() =="Wi-Fi" && type=="IPv4"){
                         QString haddr = ip.toString();
                         log("Address : " + haddr);
-
                     }
                 }
             }
@@ -259,8 +257,9 @@ void MainWindow::sendLeaderUpdatedDirectory()
     log(QString("Updated directory sent to leader (%1).").arg(leaderUsername));
 }
 
-// ─── Disconnect ────────────────────────────────────────────────────────────────
 
+// ─── Disconnect ────────────────────────────────────────────────────────────────
+//defining slots
 void MainWindow::Client_Disconnected()
 {
     QTcpSocket *socket = qobject_cast<QTcpSocket *>(sender());
