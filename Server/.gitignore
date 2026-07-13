@@ -1,8 +1,6 @@
 #removing dependency folders 
 .qtcreator
 
-build
-
 newmainwindow.ui
 form.ui
 README.md

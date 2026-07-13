@@ -1,0 +1,32 @@
+{
+	"BUILD_DIR" : "C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug2/Client_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug2",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug2",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client",
+	"CMAKE_SOURCE_DIR" : "C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Ninja",
+	"INCLUDE_DIR" : "C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug2/Client_autogen/include",
+	"INPUTS" : 
+	[
+		"C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/images/chat_icon.png",
+		"C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/images/log.png",
+		"C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/images/images.png",
+		"C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/images/chat.png",
+		"C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/images/user.png",
+		"C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/images/port.png",
+		"C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/images/systemlog.png",
+		"C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/images/icon.png"
+	],
+	"LOCK_FILE" : "C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug2/CMakeFiles/Client_autogen.dir/AutoRcc_resource_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "--no-zstd", "-name", "resource" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_resource.cpp",
+	"RCC_EXECUTABLE" : "C:/Qt/6.11.1/mingw_64/bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug2/CMakeFiles/Client_autogen.dir/AutoRcc_resource_EWIEGA46WW_Used.txt",
+	"SOURCE" : "C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/resource.qrc",
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}
