@@ -1,0 +1,9 @@
+C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug2/CMakeFiles/Client.dir
+C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug2/CMakeFiles/edit_cache.dir
+C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug2/CMakeFiles/rebuild_cache.dir
+C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug2/CMakeFiles/list_install_components.dir
+C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug2/CMakeFiles/install.dir
+C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug2/CMakeFiles/install/local.dir
+C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug2/CMakeFiles/install/strip.dir
+C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug2/CMakeFiles/Client_autogen_timestamp_deps.dir
+C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug2/CMakeFiles/Client_autogen.dir

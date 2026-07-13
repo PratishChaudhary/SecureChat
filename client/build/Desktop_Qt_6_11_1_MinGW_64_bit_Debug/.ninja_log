@@ -1,0 +1,23 @@
+# ninja log v7
+46	962	8054723013636193	Client_autogen/timestamp	4bd8dd3f24e5fbdf
+46	962	8054723013636193	Client_autogen/mocs_compilation.cpp	4bd8dd3f24e5fbdf
+46	962	8054723013636193	C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/Client_autogen/timestamp	4bd8dd3f24e5fbdf
+46	962	8054723013636193	C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/Client_autogen/mocs_compilation.cpp	4bd8dd3f24e5fbdf
+1291	1526	8054526752720279	Client_autogen/EWIEGA46WW/qrc_resource.cpp	cd4e1ee810bafc99
+1291	1526	8054526752720279	C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/Client_autogen/EWIEGA46WW/qrc_resource.cpp	cd4e1ee810bafc99
+1557	4381	8054526753211557	CMakeFiles/Client.dir/Client_autogen/EWIEGA46WW/qrc_resource.cpp.obj	e486c3f610c56b2d
+970	6116	8054723014792580	CMakeFiles/Client.dir/main.cpp.obj	73d6dcc1c6659780
+963	6883	8054723014722214	CMakeFiles/Client.dir/Client_autogen/mocs_compilation.cpp.obj	55a5dd496b880961
+988	7594	8054723014965440	CMakeFiles/Client.dir/loginwindow.cpp.obj	a57e45e31b645c61
+979	7744	8054723014880609	CMakeFiles/Client.dir/mainwindow.cpp.obj	d5c48fa0d71f8f90
+7745	8277	8054723082539389	Client.exe	dc82ca3f7942a22d
+580	4311	8054689348517591	CMakeFiles/Client.dir/authclient.cpp.obj	a4564dbec0a65645
+41	1076	8055467692923792	Client_autogen/timestamp	4bd8dd3f24e5fbdf
+41	1076	8055467692923792	Client_autogen/mocs_compilation.cpp	4bd8dd3f24e5fbdf
+41	1076	8055467692923792	C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/Client_autogen/timestamp	4bd8dd3f24e5fbdf
+41	1076	8055467692923792	C:/Users/prati/OneDrive/Desktop/SecureChat/SecureChat/client/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/Client_autogen/mocs_compilation.cpp	4bd8dd3f24e5fbdf
+1118	4606	8055467694790168	CMakeFiles/Client.dir/bubblemessage.cpp.obj	e1d7daf9b6830a00
+1077	4977	8055467694374261	CMakeFiles/Client.dir/Client_autogen/mocs_compilation.cpp.obj	55a5dd496b880961
+1103	5071	8055467694640056	CMakeFiles/Client.dir/loginwindow.cpp.obj	a57e45e31b645c61
+1088	5289	8055467694484528	CMakeFiles/Client.dir/mainwindow.cpp.obj	d5c48fa0d71f8f90
+5289	6388	8055467736492453	Client.exe	89447df27dca99d8
