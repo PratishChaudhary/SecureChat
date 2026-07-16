@@ -30,6 +30,7 @@ ClientMainWindow::~ClientMainWindow()
 }
 
 
+
 void ClientMainWindow::addmessage(const QString &username,const QString &message , bool check){
     QString time = QTime::currentTime().toString("hh:mm");
     BubbleMessage *bubble = new BubbleMessage(username, message , time);
@@ -52,9 +53,7 @@ void ClientMainWindow::addmessage(const QString &username,const QString &message
     QListWidgetItem *item = new QListWidgetItem();
     bubble->adjustSize();
     holder->adjustSize();
-    item->setSizeHint(holder->sizeHint());
-    qDebug() << "Bubble:" << bubble->sizeHint();
-    qDebug() << "Holder:" << holder->sizeHint();//set the size btw
+    item->setSizeHint(holder->sizeHint());//set the size btw
     ui->Chatlist->addItem(item);
     ui->Chatlist->setItemWidget(item,holder);
     ui->Chatlist->scrollToBottom();
