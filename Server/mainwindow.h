@@ -16,7 +16,8 @@ enum PacketType {
     CLIENT_REGISTRATION = 102,
     NORMAL_MESSAGE = 1,
     DIRECTORY_UPDATE = 104,
-    KEY_DISTRIBUTION = 105
+    KEY_DISTRIBUTION = 105,
+    USER_LIST = 106
 };
 
 QT_BEGIN_NAMESPACE
@@ -57,6 +58,7 @@ private:
     void refreshUserDisplay();
     void log(const QString &text);
     void logEvent(const QString &text);
+    void sendUserList();//this send the list to the client
 private:
     Ui::MainWindow *ui;
     QTcpServer *TCP_Server;

@@ -28,6 +28,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         bubblemessage.ui
         bubblemessage.h
         bubblemessage.cpp
+        systemlogdialog.h systemlogdialog.cpp systemlogdialog.ui
 
     )
 else()
