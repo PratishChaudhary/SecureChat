@@ -100,6 +100,25 @@ void MainWindow::logEvent(const QString &text)
     ui->textEdit_Event_Log->append(QString("[%1] %2").arg(ts, text));
 }
 
+void MainWindow::sendUserList()
+{
+    /*So we alr have the data stored in UserRegistry so i just send that same data */
+    QJsonObject packet;
+    packet["type"] = USER_LIST;
+    packet["leader"] = leaderUsername;
+    QJsonArray users;
+    for(auto it = UserRegistry.cbegin(); it!=UserRegistry.cend();it++)
+    {
+        users.append(it.key());
+    }
+    packet["users"] = users;
+    QByteArray data = QJsonDocument(packet).toJson(QJsonDocument::Compact) + "\n";
+    for(auto client: UserRegistry)
+    {
+        client->socket->write(data);
+    }
+}
+
 // Appends a line to the main server message log in the center panel
 void MainWindow::log(const QString &text)
 {
@@ -220,6 +239,7 @@ void MainWindow::Read_Data_From_Socket()
 
             refreshUserDisplay();
             sendLeaderUpdatedDirectory();
+            sendUserList();//send the data when connecting
         }
 
 
@@ -334,6 +354,7 @@ void MainWindow::Client_Disconnected()
         }
 
         refreshUserDisplay();
+        sendUserList();//send when user is out
     } else {
         socket->deleteLater();
     }

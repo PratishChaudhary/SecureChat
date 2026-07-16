@@ -6,6 +6,7 @@
 #include <QString>
 #include "QtEncryptionEngine.h"
 #include <QTime>
+#include "systemlogdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ClientMainWindow; }
@@ -26,9 +27,10 @@ private slots:
     void on_sendButton_clicked();
     void onSocketReadyRead();
     void onSocketDisconnected();
-    void addlog(const QString &message);
     void addmessage(const QString &username,const QString &message , bool check);
 
+
+    void on_pushButton_SystemLog_clicked();
 
 private:
     Ui::ClientMainWindow *ui;
@@ -37,6 +39,7 @@ private:
     QString myUsername;
     // Whether the room key is ready for encrypting/decrypting chat
     bool roomKeyReady = false;
+    SystemLogDialog *systemlog;
 };
 
 #endif // CLIENTMAINWINDOW_H
