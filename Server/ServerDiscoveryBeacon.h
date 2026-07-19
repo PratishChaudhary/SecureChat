@@ -19,20 +19,35 @@ private:
     QString getActiveServerIp() {
         QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces();
         for (const QNetworkInterface &interface : interfaces) {
-            // Must be up and actively running
-            if (!interface.flags().testFlag(QNetworkInterface::IsUp) ||
-                !interface.flags().testFlag(QNetworkInterface::IsRunning)) {
-                continue;
-            }
-            //only if they are actively running this block of code is executed.
-            for (const QNetworkAddressEntry &entry : interface.addressEntries()) {
+        bool isUp = interface.flags().testFlag(QNetworkInterface::IsUp);
+        bool isRunning = interface.flags().testFlag(QNetworkInterface::IsRunning);
+
+        if (!isUp || !isRunning) {
+            continue; // Skip if the cable is unplugged or interface is disabled
+        }
+        else
+        {
+            QList<QNetworkAddressEntry> entries = interface.addressEntries();
+            for (const QNetworkAddressEntry &entry : entries) {
                 QHostAddress ip = entry.ip();
-                // Filter out loopback(via localhost) and look for a standard IPv4 address(via wifi)
-                if (!ip.isLoopback() && ip.protocol() == QAbstractSocket::IPv4Protocol) {
-                    return ip.toString();
+
+                // 4. STAGE 2 FILTER: Skip internal lookback/localhost strings (127.0.0.1 / ::1)
+                if (ip.isLoopback()) {
+                    continue;
+                }
+
+                // Determine if it's IPv4 or IPv6
+                QString type = (ip.protocol() == QAbstractSocket::IPv4Protocol) ? "IPv4" : "IPv6";
+
+                // Print the live details
+                if(interface.humanReadableName() =="Wi-Fi" && type=="IPv4"){
+                    QString haddr = ip.toString();
+                    qDebug()<<haddr;
+                    return haddr;
                 }
             }
         }
+    }
         return "127.0.0.1"; // Fallback
     }
 
@@ -48,9 +63,9 @@ public:
 
 private slots:
     void sendBeacon() {
-        //this wasted my 20mins why this becon alway boom stupied
-        // qDebug() <<"Fired the beacon boom";
+        // qDebug()<<"boom";
         QString currentIp = getActiveServerIp();
+
 
         // Package both values cleanly using JSON
         QJsonObject serverInfo;

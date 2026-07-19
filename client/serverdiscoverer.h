@@ -33,14 +33,9 @@ private slots:
 
             if (!doc.isNull() && doc.isObject()) {
                 QJsonObject obj = doc.object();
-
                 QString name = obj["serverName"].toString();
                 quint16 port = obj["port"].toInt();
-
-                // 2. FALLBACK SAFETY: Extract the sender's physical IP address
-                // instead of trusting the string inside the packet.
-                QString ip = datagram.senderAddress().toString();
-
+                QString ip = obj["ipAddress"].toString();
                 // Clean up IPv6-mapped IPv4 styling (e.g., "::ffff:192.168.1.5" -> "192.168.1.5")
                 if (ip.startsWith("::ffff:")) {
                     ip = ip.mid(7);
