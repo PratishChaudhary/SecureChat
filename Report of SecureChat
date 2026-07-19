@@ -1,0 +1,679 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage{chngcntr}
+
+% Better typography
+\usepackage{microtype}
+
+% Disable automatic word hyphenation
+\usepackage[none]{hyphenat}
+
+\onehalfspacing
+
+% Reduce bad line breaks
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\emergencystretch=3em
+% Number figures and tables by section
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+
+\begin{document}
+
+%----------------------%
+% Title Page
+%----------------------%
+
+\pagenumbering{roman}
+
+\begin{titlepage}
+\thispagestyle{empty}
+
+\begin{center}
+
+\vspace*{1cm}
+
+{\Large\textbf{Kathmandu University}}
+
+\vspace{0.2cm}
+
+{\large\textbf{Department of Computer Science and Engineering}}
+
+\vspace{0.2cm}
+
+{\large Dhulikhel, Kavre}
+
+\vspace{0.8cm}
+
+\includegraphics[width=0.18\textwidth]{images/ku_logo.png}
+
+\vspace{0.8cm}
+
+{\Large\textbf{A Project Report}}
+
+\vspace{0.3cm}
+
+{\large on}
+
+\vspace{0.3cm}
+
+{\Large\textbf{SecureChat}}
+
+\vspace{0.2cm}
+
+{\large A Secure LAN-Based Messaging Application}
+
+\vspace{0.8cm}
+
+{\large\textbf{Course No.: ENGG 102}}
+
+\vspace{0.2cm}
+
+{\small (Submitted in Partial Fulfillment of the Requirements for Year I / Semester II in Computer Engineering)}
+
+\vspace{1cm}
+
+{\large\textbf{Submitted by}}
+
+\vspace{0.3cm}
+
+Maniraj Baral (26)\\
+Genius Bhandari (34)\\
+Aayush Bist (43)\\
+Prajwal Chamlagain (45)\\
+Pratish Chaudhary (49)
+
+\vspace{1cm}
+
+{\large\textbf{Submitted to}}
+
+\vspace{0.3cm}
+
+Supervisor's Name\\
+Department of Computer Science and Engineering
+
+\vfill
+
+July 2026
+
+\end{center}
+
+\end{titlepage}
+
+
+%----------------------%
+% Abstract
+%----------------------%
+
+\chapter*{Abstract}
+
+SecureChat is a desktop-based messaging application developed using C++ and the Qt framework. The project follows a client--server architecture and enables multiple users to communicate over a Local Area Network (LAN) using TCP sockets.
+
+The application provides real-time messaging through a graphical user interface while implementing the Diffie--Hellman key exchange algorithm to establish a shared secret for secure communication. The project demonstrates practical concepts of computer networking, socket programming, object-oriented programming, and GUI development.
+
+The SecureChat application was successfully designed, implemented, and tested. The results show reliable communication between multiple clients in a LAN environment and provide a strong foundation for future enhancements such as end-to-end encryption, internet-based communication, and file sharing.
+
+\newpage
+%----------------------%
+% Table of Contents
+%----------------------%
+
+\tableofcontents
+\newpage
+
+%----------------------%
+% List of Figures
+%----------------------%
+
+\listoffigures
+\newpage
+
+%----------------------%
+% List of Tables
+%----------------------%
+
+\listoftables
+\newpage
+
+
+
+\chapter*{Abbreviations}
+
+\begin{tabular}{ll}
+API & Application Programming Interface \\
+C++ & C Plus Plus \\
+DH & Diffie--Hellman \\
+GUI & Graphical User Interface \\
+IDE & Integrated Development Environment \\
+IP & Internet Protocol \\
+LAN & Local Area Network \\
+Qt & Cross-platform Application Framework \\
+TCP & Transmission Control Protocol \\
+UI & User Interface \\
+\end{tabular}
+
+\newpage
+
+
+%----------------------%
+% Main Report
+%----------------------%
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\chapter{Introduction}
+
+\section{Background}
+
+Communication systems play an important role in modern computing. Most messaging applications rely on cloud-based services, making it difficult for students to understand the underlying networking concepts. As a result, practical knowledge of client--server communication and socket programming is often limited.
+
+SecureChat is a desktop-based messaging application developed to provide hands-on experience with networking and secure communication. It enables users to exchange messages over a Local Area Network (LAN) while demonstrating the practical implementation of computer networking concepts.
+
+\section{Project Overview}
+
+SecureChat is a client--server messaging application developed using C++ and the Qt framework. It allows multiple users to communicate in real time over a local network. The server manages client connections and broadcasts messages to all connected users. The application also implements the Diffie--Hellman key exchange algorithm to establish a shared secret for secure communication.
+
+\section{Problem Statement}
+
+Many commercial messaging applications hide the internal working of communication systems behind cloud-based services. This limits students' practical understanding of networking concepts such as socket programming, client--server architecture, and secure communication.
+
+The SecureChat project addresses this problem by providing a simple messaging application that demonstrates these concepts through practical implementation.
+
+
+\section{Scope of the Project}
+
+The SecureChat application is designed for communication within a Local Area Network (LAN). It demonstrates real-time messaging, socket programming, and basic secure communication. The modular design allows future enhancements such as internet-based communication, file sharing, and end-to-end encryption.
+
+\section{Significance of the Project}
+
+This project helps students understand networking concepts through practical implementation. It provides experience in client--server programming, GUI development using Qt, and collaborative software development using Git and GitHub.
+
+\section{Objectives}
+
+The main objectives of the SecureChat project are:
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item Develop a desktop-based messaging application.
+    \item Implement client--server communication using TCP sockets.
+    \item Support communication among multiple users.
+    \item Design a user-friendly graphical interface using Qt.
+    \item Implement secure key exchange using the Diffie--Hellman algorithm.
+    \item Provide practical experience in networking and software development.
+\end{itemize}
+\section{Structure of the Report}
+
+The report is organized into the following chapters:
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Chapter 1: Introduction} -- Presents the background, project overview, problem statement, objectives, scope, significance, and report structure.
+    
+    \item \textbf{Chapter 2: Literature Review} -- Discusses the concepts and technologies related to the project, including client--server architecture, socket programming, TCP/IP, and the Qt framework.
+    
+    \item \textbf{Chapter 3: System Analysis and Design} -- Describes the system requirements, architecture, major modules, and overall design of the SecureChat application.
+    
+    \item \textbf{Chapter 4: Implementation} -- Explains the implementation of the client, server, graphical user interface, networking, and security features.
+    
+    \item \textbf{Chapter 5: Testing and Results} -- Presents the testing process, test cases, and the results obtained during implementation.
+    
+    \item \textbf{Chapter 6: Limitations and Future Enhancements} -- Discusses the current limitations of the application and possible future improvements.
+    
+    \item \textbf{Chapter 7: Conclusion} -- Summarizes the project and the knowledge gained during its development.
+\end{itemize}
+
+\chapter{Literature Review}
+
+\section{Introduction}
+
+This chapter presents the concepts and technologies used in the development of the SecureChat application. The project combines computer networking, graphical user interface development, and basic cryptography to create a secure desktop messaging application. Understanding these concepts provides the theoretical foundation for the implementation of the system.
+\section{Client--Server Architecture}
+
+Client--server architecture is one of the most widely used communication models in computer networks. In this model, a central server provides services while one or more clients request those services. The server manages client requests, processes data, and returns the appropriate response.
+This architecture offers several advantages, including centralized management, easier maintenance, and support for multiple users. Since all communication passes through the server, it can efficiently coordinate message exchange between connected clients.
+
+SecureChat follows the client--server model. The server accepts incoming client connections, manages active users, and broadcasts messages to all connected clients, enabling real-time communication.
+
+
+\section{TCP/IP Protocol}
+
+TCP/IP (Transmission Control Protocol/Internet Protocol) is the standard protocol suite used for communication over computer networks.
+
+The Internet Protocol (IP) is responsible for identifying devices and routing data packets across the network. Transmission Control Protocol (TCP) ensures reliable communication by checking for errors, maintaining packet order, and retransmitting lost packets when necessary.
+
+Since messaging applications require reliable communication, SecureChat uses TCP sockets to ensure that messages are delivered accurately and in the correct order.
+\section{Qt Framework}
+
+Qt is a cross-platform application development framework widely used for developing desktop applications with graphical user interfaces. It supports Windows, Linux, and macOS.
+
+Qt provides several useful libraries for GUI development, networking, threading, and event handling. These libraries simplify application development by providing ready-made classes for common programming tasks.
+
+SecureChat uses Qt Widgets for building the graphical user interface and the Qt Network module for implementing TCP communication between the client and server.
+\subsection{Qt Socket Programming}
+
+Qt provides built-in networking classes that simplify socket programming and make network application development easier. The two main classes used in SecureChat are \texttt{QTcpServer} and \texttt{QTcpSocket}.
+
+\texttt{QTcpServer} is responsible for listening to incoming client connections and accepting connection requests. After a client connects, communication is handled through \texttt{QTcpSocket}, which allows data to be sent and received over a TCP connection.
+
+Qt also uses the signal and slot mechanism to handle networking events such as new connections, incoming messages, and client disconnections. This event-driven approach reduces the complexity of socket programming and makes the application more responsive.
+
+In SecureChat, Qt socket programming is used to establish communication between the server and multiple clients. It provides reliable message transmission, simplifies network management, and integrates smoothly with the graphical user interface developed using the Qt framework.
+\subsection{QTcpServer}
+
+\texttt{QTcpServer} is a Qt class used to create a TCP server. It listens for incoming client connection requests on a specified IP address and port number. When a client attempts to connect, the server accepts the connection and creates a socket for communication. In SecureChat, \texttt{QTcpServer} is responsible for accepting multiple client connections and managing communication between them.
+
+\subsection{QTcpSocket}
+
+\texttt{QTcpSocket} is a Qt class used for TCP communication between the client and the server. It establishes a connection, sends messages, and receives data over the network. The class also detects events such as successful connections, incoming messages, and client disconnections through Qt's signal and slot mechanism. In SecureChat, each connected client communicates with the server using a \texttt{QTcpSocket} object.
+
+Together, \texttt{QTcpServer} and \texttt{QTcpSocket} provide reliable communication over TCP and simplify the implementation of real-time messaging applications. Their integration with the Qt framework makes network programming easier while supporting efficient communication between multiple clients and the server.
+\section{Diffie--Hellman Key Exchange}
+
+Diffie--Hellman is a public key exchange algorithm that enables two communicating parties to establish a shared secret over an insecure network.
+
+Instead of directly sending the secret key, both parties exchange public values and independently calculate the same shared key. Since the secret itself is never transmitted, the communication becomes more secure.
+
+In SecureChat, the Diffie--Hellman algorithm is used to demonstrate secure key exchange before communication begins.
+\chapter{Related Work}
+
+\section{Introduction}
+
+Several desktop messaging applications have been developed using client--server architecture and socket programming. These applications demonstrate real-time communication and provide a foundation for understanding network programming.
+
+\section{Existing Messaging Applications}
+
+Applications such as WhatsApp, Telegram, Discord, and Microsoft Teams provide secure communication over the Internet. They support features such as instant messaging, media sharing, voice calls, and end-to-end encryption. However, these systems rely on cloud infrastructure and do not expose their internal implementation.
+
+\section{Academic Projects}
+
+Many academic networking projects focus on simple chat applications using TCP sockets. These projects generally implement client--server communication but often lack graphical user interfaces or secure communication mechanisms. 
+
+Some examples of Academic Projects we came across are:
+\newpage
+\subsection{SyncStream:}
+SyncStream is a real-time, multi-user chat application built for Windows. It allows multiple users to connect to a central server and broadcast text messages in real time.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/syncstream_server.png}
+\caption{SyncStream:Server}
+\label{fig:SyncStream:Server}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/syncstream_client.png}
+\caption{SyncStream:Client}
+\label{fig:SyncStream:Client}
+\end{figure}
+
+\section{Comparison with SecureChat}
+
+SecureChat is designed primarily for educational purposes. It combines socket programming, GUI development using Qt, and the Diffie--Hellman key exchange algorithm into a single desktop application. Unlike commercial applications, it helps students understand the practical implementation of networking concepts.
+
+\section{Summary}
+
+The study of existing messaging systems and academic projects helped identify the features required for SecureChat. These ideas were used to design a simple, modular, and educational messaging application.
+\chapter{System Analysis and Design}
+
+\section{Introduction}
+
+This chapter describes the design and overall structure of the SecureChat application. It presents the system requirements, architecture, major modules, and workflow of the application.
+
+\section{System Requirements}
+
+\subsection{Hardware Requirements}
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item Processor: Intel Core i3 or equivalent
+    \item RAM: Minimum 4 GB
+    \item Storage: Minimum 200 MB free space
+    \item Local Area Network (LAN)
+\end{itemize}
+
+\subsection{Software Requirements}
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item Operating System: Windows or Linux
+    \item Qt Framework
+    \item C++ Compiler
+    \item CMake
+    \item Git
+\end{itemize}
+
+\section{Functional Requirements}
+
+The SecureChat application provides the following features:
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item Connect clients to the server.
+    \item Exchange messages in real time.
+    \item Support multiple connected users.
+    \item Broadcast messages to all connected clients.
+    \item Perform secure key exchange using Diffie--Hellman.
+\end{itemize}
+
+\section{Non-Functional Requirements}
+
+The system is designed to satisfy the following requirements:
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item Reliable communication using TCP.
+    \item Simple and user-friendly interface.
+    \item Fast message transmission.
+    \item Modular and maintainable code structure.
+\end{itemize}
+
+\section{System Architecture}
+
+SecureChat follows a client--server architecture. The server manages all client connections and message broadcasting. Clients connect to the server through TCP sockets, perform key exchange, and communicate by sending and receiving messages over the network.
+
+SecureChat follows a client--server architecture as shown in Figure~\ref{fig:architecture}. The server accepts client connections, manages communication, and broadcasts messages to all connected users.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/architecture.png}
+\caption{System Architecture of SecureChat}
+\label{fig:architecture}
+\end{figure}
+
+\section{Major Modules}
+
+The application consists of the following modules:
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Server Module} -- Accepts client connections and broadcasts messages.
+    \item \textbf{Client Module} -- Provides the user interface and manages communication with the server.
+    \item \textbf{Communication Module} -- Handles TCP socket communication between the client and server.
+    \item \textbf{Security Module} -- Performs the Diffie--Hellman key exchange for secure communication.
+\end{itemize}
+
+Figure~\ref{fig:usecase} illustrates the primary interactions between the user and the SecureChat application.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{images/usecase.png}
+\caption{Use Case Diagram of SecureChat}
+\label{fig:usecase}
+\end{figure}
+
+\section{System Workflow}
+
+The overall workflow of the SecureChat application is as follows:
+
+\begin{enumerate}
+    \item Start the server application.
+    \item Connect one or more clients to the server.
+    \item Perform secure key exchange.
+    \item Exchange messages between users.
+    \item Broadcast messages to all connected clients.
+    \item Disconnect from the server after communication.
+\end{enumerate}
+\chapter{Implementation}
+
+\section{Introduction}
+
+This chapter describes the implementation of the SecureChat application. The project was developed using C++ and the Qt framework based on a client--server architecture. The implementation consists of separate client and server applications that communicate through TCP sockets while providing a graphical user interface for users.
+
+\section{Development Environment}
+
+The application was developed using the following tools:
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item Programming Language: C++
+    \item Framework: Qt 6
+    \item IDE: Qt Creator
+    \item Build System: CMake
+    \item Version Control: Git and GitHub
+    \item Operating System: Windows
+\end{itemize}
+
+\section{Project Structure}
+
+The SecureChat project is divided into two main parts:
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item Server Application
+    \item Client Application
+\end{itemize}
+
+The server manages all client connections and communication, whereas the client provides the graphical interface for users to interact with the system.
+\section{Server Implementation}
+
+The server application is responsible for accepting client connections, managing connected users, and broadcasting messages. It continuously listens for new client requests and forwards messages to all connected users.
+
+The server consists of the following components:
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{mainwindow} -- Controls the main server window and manages communication.
+    \item \textbf{authmanager} -- Handles user authentication and authorization.
+    \item \textbf{ServerDiscoveryBeacon} -- Allows clients to discover the server automatically within the local network.
+\end{itemize}
+\section{Client Implementation}
+
+The client application provides an interactive graphical interface through which users connect to the server and exchange messages. It communicates with the server using TCP sockets and updates the interface whenever new messages arrive.
+
+The client is composed of the following components:
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Login Window} -- Allows users to enter their credentials and the IP-address of the server where the server is hosted before joining the chat.
+    \item \textbf{Main Window} -- Displays conversations and provides message input.
+    \item \textbf{Auth Client} -- Communicates with the server for authentication.
+    \item \textbf{Bubble Message} -- Displays chat messages in a user-friendly bubble format.
+    \item \textbf{System Log Dialog} -- Displays important system messages and logs.
+    \item \textbf{Server Discoverer} -- Detects available servers on the local network.
+\end{itemize}
+\section{Graphical User Interface}
+
+The graphical user interface was developed using Qt Widgets. The interface includes a login window, chat window, message display area, and message input field. The design provides a simple and user-friendly environment for communication.
+
+The GUI updates automatically whenever new messages are received from the server.
+\section{Networking}
+
+Networking is implemented using the Qt Network module. TCP sockets establish reliable communication between the client and server. The server listens for incoming connections while multiple clients connect using the server's IP address and port number.
+
+Once connected, messages are transmitted through the server and broadcast to all active clients in real time.
+\section{Security Implementation}
+
+SecureChat demonstrates secure communication by implementing the Diffie--Hellman key exchange algorithm. Before communication begins, the client and server exchange public values and independently generate a shared secret key.
+
+The project also includes the QtEncryptionEngine module, which provides encryption-related functionality for secure communication.
+\section{Implementation Workflow}
+
+The overall implementation process follows these steps:
+
+\begin{enumerate}
+    \item Start the server application.
+    \item Clients discover or connect to the server.
+    \item User authentication is performed.
+    \item Diffie--Hellman key exchange establishes a shared secret.
+    \item Messages are exchanged between connected users.
+    \item The server broadcasts messages to all active clients.
+    \item Clients disconnect when communication is complete.
+\end{enumerate}
+\chapter{Testing and Results}
+
+\section{Introduction}
+
+This chapter presents the testing carried out on the SecureChat application. The objective was to verify that the client and server communicate correctly, messages are delivered successfully, and the implemented features operate as expected.
+
+\section{Testing Environment}
+
+The application was tested under the following environment:
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item Operating System: Windows
+    \item Framework: Qt 6
+    \item Communication Protocol: TCP
+    \item Network: Local Area Network (LAN)
+    \item Multiple client instances connected to a single server
+\end{itemize}
+\section{Test Cases}
+
+The following test cases were performed to verify the functionality of the application.
+
+\begin{table}[H]
+\centering
+\caption{Test Cases}
+\begin{tabular}{|c|p{5cm}|c|}
+\hline
+\textbf{Test ID} & \textbf{Description} & \textbf{Result} \\
+\hline
+TC-01 & Server starts successfully & Passed \\
+\hline
+TC-02 & Client connects to server & Passed \\
+\hline
+TC-03 & User authentication & Passed \\
+\hline
+TC-04 & Message transmission & Passed \\
+\hline
+TC-05 & Message broadcasting & Passed \\
+\hline
+TC-06 & Multiple clients communicate simultaneously & Passed \\
+\hline
+TC-07 & Server discovery & Passed \\
+\hline
+TC-08 & Secure key exchange & Passed \\
+\hline
+\end{tabular}
+\end{table}
+\section{Results}
+
+The SecureChat application was successfully implemented and tested. Multiple clients were able to connect to the server simultaneously and exchange messages in real time. The server correctly broadcast messages to all connected clients.
+
+The authentication mechanism worked as expected, and the Diffie--Hellman key exchange was successfully performed before communication. Automatic server discovery also simplified the connection process within the local network.
+\section{Performance Evaluation}
+
+The SecureChat application performed efficiently during testing in a Local Area Network (LAN) environment. Clients were able to connect to the server without significant delay, and messages were delivered to all connected users in real time.
+
+The server successfully handled multiple client connections simultaneously while maintaining stable communication throughout the testing process. The broadcasting mechanism ensured that messages were received by all active clients without data loss.
+
+The graphical user interface remained responsive during message exchange, allowing users to send and receive messages smoothly. The implementation of the Diffie--Hellman key exchange was also verified, demonstrating secure key establishment before communication.
+
+Overall, the application achieved reliable performance and satisfied the functional requirements defined for the project.
+\chapter{Project Planning and Management}
+
+\section{Introduction}
+
+Proper planning and management were essential for the successful completion of the SecureChat project. The project was divided into several phases to ensure systematic development and timely completion.
+
+\section{Project Development Phases}
+
+The project was completed through the following phases:
+
+\begin{itemize}
+\item Requirement Analysis
+\item System Design
+\item GUI Development
+\item Client and Server Implementation
+\item Diffie--Hellman Integration
+\item Testing and Debugging
+\item Documentation
+\end{itemize}
+
+\section{Gantt Chart}
+
+Figure~\ref{fig:gantt} illustrates the project schedule followed during development.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{images/ganttchart.png}
+\caption{Project Gantt Chart}
+\label{fig:gantt}
+\end{figure}
+\section{Team Responsibilities}
+
+\begin{table}[H]
+\centering
+\caption{Division of Work Among Team Members}
+\begin{tabular}{|l|p{8cm}|}
+\hline
+\textbf{Member} & \textbf{Responsibility} \\
+\hline
+Maniraj Baral &GUI development and functionality testing\\
+\hline
+Genius Bhandari & Security module and integration \\
+\hline
+Aayush Bist & Documentation and testing \\
+\hline
+Prajwal Chamlagain & Client module development and GUI testing \\
+\hline
+Pratish Chaudhary & Server implementation and networking \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Summary}
+
+This chapter presented the project planning and management activities carried out during the development of SecureChat. It described the different phases of the project, the responsibilities assigned to each team member, and the development schedule through the Gantt chart.
+
+Proper planning, task distribution, and teamwork helped ensure that the project was completed systematically and within the planned time. Effective coordination among team members also contributed to the successful implementation and documentation of the SecureChat application.
+\chapter{Limitations and Future Enhancements}
+
+\section{Introduction}
+
+Although the SecureChat application successfully provides secure communication over a Local Area Network (LAN), it has certain limitations. This chapter discusses the current limitations of the system and suggests possible enhancements for future development.
+\section{Limitations}
+
+The current version of SecureChat has the following limitations:
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item The application works only within a Local Area Network (LAN).
+    \item File and media sharing are not supported.
+    \item Group management features such as creating or deleting chat groups are not available.
+    \item User accounts are limited to the implemented authentication mechanism.
+    \item Message history is not permanently stored after the application is closed.
+    \item The application is primarily designed for desktop platforms.
+\end{itemize}
+\section{Future Enhancements}
+
+The following improvements can be made in future versions of the application:
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item Support communication over the Internet instead of only LAN.
+    \item Implement end-to-end encryption for enhanced security.
+    \item Add file, image, and document sharing.
+    \item Store chat history in a database.
+    \item Support voice and video communication.
+    \item Improve group chat management features.
+    \item Add push notifications and status indicators.
+    \item Develop mobile versions of the application for Android and iOS.
+
+\section{Summary}
+The current implementation of SecureChat demonstrates the fundamental concepts of networking, client--server communication, and secure key exchange. With additional features such as internet support, multimedia sharing, and enhanced security, the application can be further developed into a more complete messaging platform.
+\end{itemize}
+\chapter{Conclusion and References}
+
+\section{Conclusion}
+
+The SecureChat project successfully achieved its main objective of developing a desktop-based messaging application using C++ and the Qt framework. The application enables multiple users to communicate over a Local Area Network (LAN) through a client--server architecture using TCP sockets.
+
+The project also demonstrated the use of the Diffie--Hellman key exchange algorithm for secure communication and provided practical experience in networking, GUI development, and software engineering. Overall, SecureChat met the intended objectives and serves as a strong foundation for future enhancements such as end-to-end encryption, file sharing, and internet-based communication.
+
+\section{References}
+
+\begin{enumerate}
+
+\item Bjarne Stroustrup. \textit{The C++ Programming Language (4th Edition)}. Addison-Wesley Professional, 2013.
+
+\item Qt Documentation. Available: \url{https://doc.qt.io/}
+
+\item Qt Network Module Documentation. Available: \url{https://doc.qt.io/qt-6/qtnetwork-index.html}
+
+\item CMake Documentation. Available: \url{https://cmake.org/documentation/}
+
+\item Git Documentation. Available: \url{https://git-scm.com/doc}
+
+\item GitHub Documentation. Available: \url{https://docs.github.com/}
+
+\item Academic Project - SyncStream by yadunand-kamath. Available: \url{https://github.com/yadunand-kamath/SyncStream}
+
+\end{enumerate}
+\end{document}
