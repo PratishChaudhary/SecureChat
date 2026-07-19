@@ -25,17 +25,16 @@ public:
     QVBoxLayout *verticalLayout_2;
     QFrame *frame;
     QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout;
     QLabel *Name;
-    QHBoxLayout *horizontalLayout_3;
     QLabel *Message;
+    QHBoxLayout *horizontalLayout;
     QLabel *Time;
 
     void setupUi(QDialog *BubbleMessage)
     {
         if (BubbleMessage->objectName().isEmpty())
             BubbleMessage->setObjectName("BubbleMessage");
-        BubbleMessage->resize(792, 207);
+        BubbleMessage->resize(568, 271);
         QSizePolicy sizePolicy(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -60,8 +59,6 @@ public:
         verticalLayout = new QVBoxLayout(frame);
         verticalLayout->setObjectName("verticalLayout");
         verticalLayout->setContentsMargins(12, 10, 12, 10);
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName("horizontalLayout");
         Name = new QLabel(frame);
         Name->setObjectName("Name");
         QFont font;
@@ -71,30 +68,19 @@ public:
         Name->setFont(font);
         Name->setStyleSheet(QString::fromUtf8("color:rgb(218, 218, 218);\n"
 "border:none;"));
+        Name->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop);
 
-        horizontalLayout->addWidget(Name);
+        verticalLayout->addWidget(Name);
 
-
-        verticalLayout->addLayout(horizontalLayout);
-
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName("horizontalLayout_3");
         Message = new QLabel(frame);
         Message->setObjectName("Message");
-        QSizePolicy sizePolicy1(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Preferred);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(Message->sizePolicy().hasHeightForWidth());
-        Message->setSizePolicy(sizePolicy1);
-        Message->setStyleSheet(QString::fromUtf8("color:white;\n"
-"border:none;"));
+        Message->setStyleSheet(QString::fromUtf8("border:none;"));
         Message->setWordWrap(true);
 
-        horizontalLayout_3->addWidget(Message);
+        verticalLayout->addWidget(Message);
 
-
-        verticalLayout->addLayout(horizontalLayout_3);
-
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName("horizontalLayout");
         Time = new QLabel(frame);
         Time->setObjectName("Time");
         Time->setEnabled(true);
@@ -102,7 +88,10 @@ public:
 "border:none;"));
         Time->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
 
-        verticalLayout->addWidget(Time);
+        horizontalLayout->addWidget(Time);
+
+
+        verticalLayout->addLayout(horizontalLayout);
 
 
         verticalLayout_2->addWidget(frame);
@@ -116,8 +105,11 @@ public:
     void retranslateUi(QDialog *BubbleMessage)
     {
         BubbleMessage->setWindowTitle(QCoreApplication::translate("BubbleMessage", "Dialog", nullptr));
+#if QT_CONFIG(whatsthis)
+        BubbleMessage->setWhatsThis(QCoreApplication::translate("BubbleMessage", "<html><head/><body><p><br/></p></body></html>", nullptr));
+#endif // QT_CONFIG(whatsthis)
         Name->setText(QCoreApplication::translate("BubbleMessage", "Name", nullptr));
-        Message->setText(QCoreApplication::translate("BubbleMessage", "Message", nullptr));
+        Message->setText(QCoreApplication::translate("BubbleMessage", "TextLabel", nullptr));
         Time->setText(QCoreApplication::translate("BubbleMessage", "Time", nullptr));
     } // retranslateUi
 

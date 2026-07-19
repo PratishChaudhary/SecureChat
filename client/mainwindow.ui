@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1104</width>
+    <width>1084</width>
     <height>925</height>
    </rect>
   </property>
@@ -15,6 +15,11 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
+  </property>
+  <property name="font">
+   <font>
+    <stylestrategy>NoAntialias</stylestrategy>
+   </font>
   </property>
   <property name="windowTitle">
    <string>SecureChat — Client</string>
@@ -26,31 +31,7 @@
    <property name="styleSheet">
     <string notr="true">background-color:black;</string>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_7">
-    <item>
-     <widget class="QTextEdit" name="textEdit_ChatDisplay">
-      <property name="maximumSize">
-       <size>
-        <width>0</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::LayoutDirection::LeftToRight</enum>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border-radius:0px;
-border-top: 1px solid #2A3445;
-border-bottom:none;
-border-left:none;
-border-right:none;
-</string>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
+   <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
      <widget class="QFrame" name="Window">
       <property name="styleSheet">
@@ -495,11 +476,14 @@ border-bottom:1px solid #2A3445;
                 </property>
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_4">
+                  <property name="spacing">
+                   <number>10</number>
+                  </property>
                   <property name="leftMargin">
                    <number>30</number>
                   </property>
                   <property name="rightMargin">
-                   <number>9</number>
+                   <number>30</number>
                   </property>
                   <item>
                    <widget class="QLabel" name="chat_icon">
@@ -577,8 +561,33 @@ background-color:none;</string>
                   </item>
                   <item>
                    <widget class="QPushButton" name="pushButton_SystemLog">
+                    <property name="font">
+                     <font>
+                      <family>Calibri</family>
+                      <pointsize>18</pointsize>
+                     </font>
+                    </property>
+                    <property name="layoutDirection">
+                     <enum>Qt::LayoutDirection::RightToLeft</enum>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QPushButton {
+    background: transparent;
+    border: none;
+    color: white;
+}
+
+QPushButton:hover {
+    background-color: rgb(35,35,35);
+    border-radius: 6px;
+}
+
+QPushButton:pressed {
+    background-color: rgb(25,25,25);
+}</string>
+                    </property>
                     <property name="text">
-                     <string>SystemLog</string>
+                     <string/>
                     </property>
                    </widget>
                   </item>

@@ -20,7 +20,6 @@
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -30,8 +29,7 @@ class Ui_ClientMainWindow
 {
 public:
     QWidget *centralwidget;
-    QHBoxLayout *horizontalLayout_7;
-    QTextEdit *textEdit_ChatDisplay;
+    QVBoxLayout *verticalLayout_5;
     QFrame *Window;
     QVBoxLayout *verticalLayout_2;
     QFrame *upperportion;
@@ -75,32 +73,21 @@ public:
     {
         if (ClientMainWindow->objectName().isEmpty())
             ClientMainWindow->setObjectName("ClientMainWindow");
-        ClientMainWindow->resize(1104, 925);
+        ClientMainWindow->resize(1084, 925);
         QSizePolicy sizePolicy(QSizePolicy::Policy::Ignored, QSizePolicy::Policy::Ignored);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(ClientMainWindow->sizePolicy().hasHeightForWidth());
         ClientMainWindow->setSizePolicy(sizePolicy);
+        QFont font;
+        font.setStyleStrategy(QFont::NoAntialias);
+        ClientMainWindow->setFont(font);
         ClientMainWindow->setStyleSheet(QString::fromUtf8(""));
         centralwidget = new QWidget(ClientMainWindow);
         centralwidget->setObjectName("centralwidget");
         centralwidget->setStyleSheet(QString::fromUtf8("background-color:black;"));
-        horizontalLayout_7 = new QHBoxLayout(centralwidget);
-        horizontalLayout_7->setObjectName("horizontalLayout_7");
-        textEdit_ChatDisplay = new QTextEdit(centralwidget);
-        textEdit_ChatDisplay->setObjectName("textEdit_ChatDisplay");
-        textEdit_ChatDisplay->setMaximumSize(QSize(0, 16777215));
-        textEdit_ChatDisplay->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
-        textEdit_ChatDisplay->setStyleSheet(QString::fromUtf8("border-radius:0px;\n"
-"border-top: 1px solid #2A3445;\n"
-"border-bottom:none;\n"
-"border-left:none;\n"
-"border-right:none;\n"
-""));
-        textEdit_ChatDisplay->setReadOnly(true);
-
-        horizontalLayout_7->addWidget(textEdit_ChatDisplay);
-
+        verticalLayout_5 = new QVBoxLayout(centralwidget);
+        verticalLayout_5->setObjectName("verticalLayout_5");
         Window = new QFrame(centralwidget);
         Window->setObjectName("Window");
         Window->setStyleSheet(QString::fromUtf8("background-color:#0B0F14;"));
@@ -159,14 +146,14 @@ public:
         SecureLabel->setObjectName("SecureLabel");
         SecureLabel->setMinimumSize(QSize(30, 0));
         SecureLabel->setMaximumSize(QSize(67, 70));
-        QFont font;
-        font.setFamilies({QString::fromUtf8("Calibri")});
-        font.setPointSize(18);
-        font.setBold(true);
-        font.setItalic(false);
-        font.setUnderline(false);
-        font.setStrikeOut(false);
-        SecureLabel->setFont(font);
+        QFont font1;
+        font1.setFamilies({QString::fromUtf8("Calibri")});
+        font1.setPointSize(18);
+        font1.setBold(true);
+        font1.setItalic(false);
+        font1.setUnderline(false);
+        font1.setStrikeOut(false);
+        SecureLabel->setFont(font1);
         SecureLabel->setStyleSheet(QString::fromUtf8("\n"
 "    QLabel {\n"
 "    color: White;\n"
@@ -180,12 +167,12 @@ public:
 
         ChatLabel = new QLabel(SecureChatframe);
         ChatLabel->setObjectName("ChatLabel");
-        QFont font1;
-        font1.setFamilies({QString::fromUtf8("Calibri")});
-        font1.setPointSize(18);
-        font1.setBold(true);
-        font1.setItalic(false);
-        ChatLabel->setFont(font1);
+        QFont font2;
+        font2.setFamilies({QString::fromUtf8("Calibri")});
+        font2.setPointSize(18);
+        font2.setBold(true);
+        font2.setItalic(false);
+        ChatLabel->setFont(font2);
         ChatLabel->setStyleSheet(QString::fromUtf8("color:rgb(15, 200, 194);\n"
 "border:none;"));
 
@@ -213,10 +200,10 @@ public:
         label_IdentityDisplay = new QLabel(User_);
         label_IdentityDisplay->setObjectName("label_IdentityDisplay");
         label_IdentityDisplay->setMinimumSize(QSize(0, 30));
-        QFont font2;
-        font2.setFamilies({QString::fromUtf8("Calibri")});
-        font2.setPointSize(13);
-        label_IdentityDisplay->setFont(font2);
+        QFont font3;
+        font3.setFamilies({QString::fromUtf8("Calibri")});
+        font3.setPointSize(13);
+        label_IdentityDisplay->setFont(font3);
         label_IdentityDisplay->setStyleSheet(QString::fromUtf8("border:none;"));
         label_IdentityDisplay->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter);
 
@@ -226,9 +213,9 @@ public:
         Loginn_text->setObjectName("Loginn_text");
         Loginn_text->setMinimumSize(QSize(0, 30));
         Loginn_text->setMaximumSize(QSize(16777215, 30));
-        QFont font3;
-        font3.setPointSize(12);
-        Loginn_text->setFont(font3);
+        QFont font4;
+        font4.setPointSize(12);
+        Loginn_text->setFont(font4);
         Loginn_text->setStyleSheet(QString::fromUtf8("border:none;"));
 
         gridLayout_2->addWidget(Loginn_text, 0, 1, 1, 1);
@@ -296,8 +283,9 @@ public:
         verticalLayout_4->setObjectName("verticalLayout_4");
         verticalLayout_4->setContentsMargins(0, -1, 0, 0);
         horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setSpacing(10);
         horizontalLayout_4->setObjectName("horizontalLayout_4");
-        horizontalLayout_4->setContentsMargins(30, -1, 9, -1);
+        horizontalLayout_4->setContentsMargins(30, -1, 30, -1);
         chat_icon = new QLabel(Chatandlogoframe);
         chat_icon->setObjectName("chat_icon");
         chat_icon->setMinimumSize(QSize(30, 20));
@@ -320,11 +308,11 @@ public:
         chat_label->setSizePolicy(sizePolicy4);
         chat_label->setMinimumSize(QSize(0, 34));
         chat_label->setMaximumSize(QSize(16777215, 30));
-        QFont font4;
-        font4.setFamilies({QString::fromUtf8("Calibri")});
-        font4.setPointSize(18);
-        font4.setItalic(false);
-        chat_label->setFont(font4);
+        QFont font5;
+        font5.setFamilies({QString::fromUtf8("Calibri")});
+        font5.setPointSize(18);
+        font5.setItalic(false);
+        chat_label->setFont(font5);
         chat_label->setStyleSheet(QString::fromUtf8("QLabel {\n"
 "	border: none;\n"
 "    padding: 0px;\n"
@@ -335,6 +323,25 @@ public:
 
         pushButton_SystemLog = new QPushButton(Chatandlogoframe);
         pushButton_SystemLog->setObjectName("pushButton_SystemLog");
+        QFont font6;
+        font6.setFamilies({QString::fromUtf8("Calibri")});
+        font6.setPointSize(18);
+        pushButton_SystemLog->setFont(font6);
+        pushButton_SystemLog->setLayoutDirection(Qt::LayoutDirection::RightToLeft);
+        pushButton_SystemLog->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"    color: white;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(35,35,35);\n"
+"    border-radius: 6px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: rgb(25,25,25);\n"
+"}"));
 
         horizontalLayout_4->addWidget(pushButton_SystemLog);
 
@@ -521,7 +528,7 @@ public:
         verticalLayout_2->addWidget(Chat_sendbuttonFrame);
 
 
-        horizontalLayout_7->addWidget(Window);
+        verticalLayout_5->addWidget(Window);
 
         ClientMainWindow->setCentralWidget(centralwidget);
 
@@ -545,7 +552,7 @@ public:
         Userlogo->setText(QString());
         chat_icon->setText(QString());
         chat_label->setText(QCoreApplication::translate("ClientMainWindow", "Chat", nullptr));
-        pushButton_SystemLog->setText(QCoreApplication::translate("ClientMainWindow", "SystemLog", nullptr));
+        pushButton_SystemLog->setText(QString());
         label_2->setText(QCoreApplication::translate("ClientMainWindow", "Members", nullptr));
         lineEdit_ChatMsg->setPlaceholderText(QCoreApplication::translate("ClientMainWindow", "Type a message...", nullptr));
         sendButton->setText(QCoreApplication::translate("ClientMainWindow", "Send", nullptr));

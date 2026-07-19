@@ -47,13 +47,14 @@ public:
     QFrame *LoginBoxFrame;
     QHBoxLayout *horizontalLayout;
     QPushButton *Login;
+    QLabel *label;
     QListWidget *listWidget;
 
     void setupUi(QDialog *mainwindow1)
     {
         if (mainwindow1->objectName().isEmpty())
             mainwindow1->setObjectName("mainwindow1");
-        mainwindow1->resize(568, 932);
+        mainwindow1->resize(568, 989);
         mainwindow1->setMinimumSize(QSize(550, 700));
         mainwindow1->setMaximumSize(QSize(16777215, 16777215));
         QFont font;
@@ -240,14 +241,37 @@ public:
         QFont font2;
         font2.setPointSize(21);
         Login->setFont(font2);
-        Login->setStyleSheet(QString::fromUtf8("background-color:rgba(0, 207, 239, 0.65);\n"
+        Login->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"background-color:rgba(0, 207, 239, 0.65);\n"
 "border:rgb(14, 130, 255);\n"
-"border-radius:10px;"));
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:rgb(0, 255, 255);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color:rgb(0, 102, 255);\n"
+"	\n"
+"}\n"
+""));
 
         horizontalLayout->addWidget(Login);
 
 
         verticalLayout_2->addWidget(LoginBoxFrame);
+
+        label = new QLabel(Over);
+        label->setObjectName("label");
+        QFont font3;
+        font3.setPointSize(18);
+        label->setFont(font3);
+        label->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
+        label->setStyleSheet(QString::fromUtf8("border:none;"));
+        label->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_2->addWidget(label);
 
         listWidget = new QListWidget(Over);
         listWidget->setObjectName("listWidget");
@@ -276,6 +300,7 @@ public:
         lineEdit_address->setText(QString());
         lineEdit_address->setPlaceholderText(QCoreApplication::translate("mainwindow1", "Address", nullptr));
         Login->setText(QCoreApplication::translate("mainwindow1", "Login", nullptr));
+        label->setText(QCoreApplication::translate("mainwindow1", "Chat Room", nullptr));
     } // retranslateUi
 
 };

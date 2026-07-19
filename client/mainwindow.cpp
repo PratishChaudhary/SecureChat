@@ -14,9 +14,13 @@ ClientMainWindow::ClientMainWindow(QWidget *parent)
     , ui(new Ui::ClientMainWindow)
 {
     ui->setupUi(this);
+    setWindowIcon(QIcon(":/images/images.png"));
     systemlog = new SystemLogDialog(this);
-    socket = new QTcpSocket(this);
+    ui->pushButton_SystemLog->setIcon(QIcon(":/images/log.png"));
+    ui->pushButton_SystemLog->setIconSize(QSize(30,25));
 
+
+    socket = new QTcpSocket(this);
     connect(socket, &QTcpSocket::readyRead,    this, &ClientMainWindow::onSocketReadyRead);
     connect(socket, &QTcpSocket::disconnected, this, &ClientMainWindow::onSocketDisconnected);
     //Right_Click on member list
@@ -36,17 +40,17 @@ ClientMainWindow::~ClientMainWindow()
     delete ui;
 }
 
-
-
-void ClientMainWindow::addmessage(const QString &username,const QString &message , bool check){
+void ClientMainWindow::addmessage(const QString &username, const QString &message, bool check){
     QString time = QTime::currentTime().toString("hh:mm");
-    BubbleMessage *bubble = new BubbleMessage(username, message , time);
-    bubble->setMaximumWidth(400);
-    //creating a another widget and allign in accounding to it
+    BubbleMessage *bubble = new BubbleMessage(username, message, time);
+    bubble->setMaximumWidth(ui->Chatlist->width() * 0.6);
+    bubble->adjustSize();
+
     QWidget *holder = new QWidget;
     QHBoxLayout *layout = new QHBoxLayout(holder);
-    layout->setContentsMargins(5,5,5,5);//width , height , x , y
-    if(!check)
+    layout->setContentsMargins(5, 5, 5, 5);
+
+    if (!check)
     {
         layout->addWidget(bubble);
         layout->addStretch();
@@ -56,16 +60,16 @@ void ClientMainWindow::addmessage(const QString &username,const QString &message
         layout->addWidget(bubble);
     }
 
-
     QListWidgetItem *item = new QListWidgetItem();
-    bubble->adjustSize();
+    holder->layout()->activate();
     holder->adjustSize();
-    item->setSizeHint(holder->sizeHint());//set the size btw
+    holder->updateGeometry();
+    item->setSizeHint(holder->sizeHint());
+    item->setSizeHint(holder->layout()->sizeHint());
     ui->Chatlist->addItem(item);
-    ui->Chatlist->setItemWidget(item,holder);
+    ui->Chatlist->setItemWidget(item, holder);
     ui->Chatlist->scrollToBottom();
 }
-
 
 // ─── Called by main() right after the window is constructed ──────────────────
 void ClientMainWindow::setSessionUsername(const QString& username,const QString& HAddr)
@@ -191,11 +195,13 @@ void ClientMainWindow::onSocketReadyRead()
                 QString incoming_message = plaintext.mid(end+3);
                 addmessage(incoming_username,incoming_message,0);
 
-
-                ui->textEdit_ChatDisplay->append(plaintext);
+                systemlog->addlog(plaintext);
+                // ui->textEdit_ChatDisplay->append(plaintext);
             } else {
                 // No key yet (e.g. server admin message sent before key exchange)
-                ui->textEdit_ChatDisplay->append("[unencrypted] " + payload);
+                QString payload_ = "[unencrypted]" + payload;
+                systemlog->addlog(payload_);
+                // ui->textEdit_ChatDisplay->append("[unencrypted] " + payload);
             }
         }
 

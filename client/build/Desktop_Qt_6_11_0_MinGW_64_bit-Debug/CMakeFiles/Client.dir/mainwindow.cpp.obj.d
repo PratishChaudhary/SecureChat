@@ -485,8 +485,6 @@ CMakeFiles/Client.dir/mainwindow.cpp.obj: \
  D:/qt_framework/6.11.0/mingw_64/include/QtWidgets/QPushButton \
  D:/qt_framework/6.11.0/mingw_64/include/QtWidgets/qpushbutton.h \
  D:/qt_framework/6.11.0/mingw_64/include/QtWidgets/qabstractbutton.h \
- D:/qt_framework/6.11.0/mingw_64/include/QtWidgets/QTextEdit \
- D:/qt_framework/6.11.0/mingw_64/include/QtWidgets/qtextedit.h \
  D:/qt_framework/6.11.0/mingw_64/include/QtWidgets/QVBoxLayout \
  D:/qt_framework/6.11.0/mingw_64/include/QtWidgets/QWidget \
  C:\Users\ACER\Desktop\Mod-SecureChat\SecureChat\client\bubblemessage.h \

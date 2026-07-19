@@ -13,6 +13,7 @@ mainwindow1::mainwindow1(QWidget *parent)
 
     ui->setupUi(this);
     this->QWidget::setWindowTitle("Secure Chat");
+    setWindowIcon(QIcon(":/images/images.png"));
     setupDiscovery();
 }
 void mainwindow1::on_Login_clicked()

@@ -7,10 +7,11 @@ BubbleMessage::BubbleMessage(const QString &username , const QString &message , 
     , ui(new Ui::BubbleMessage)
 {
     ui->setupUi(this);
-    ui->Name->setText(username);;
+    ui->Name->setText(username);
     ui->Message->setText(message);
     ui->Time->setText(time);
-
+    ui->Message->setMaximumWidth(280);
+    adjustSize();
 }
 
 BubbleMessage::~BubbleMessage()
